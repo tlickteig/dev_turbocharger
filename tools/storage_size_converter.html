@@ -17,15 +17,37 @@ layout: default
 <h3 id="outputValue">0</h3>
 
 <script>
-    $(document).ready(function() {
-        $("#inputValue").keyup(function() {
-            var inputValue = parseFloat($(this).val());
-            if (isNaN(inputValue)) {
-                inputValue = 0;
-            }
+    let selectedInputNumberOfBits = 1;
+    let selectedOutputNumberOfBits = 1;
 
-            $("#outputValue").text(inputValue);
-            console.log(inputValue);
+    function convert() {
+        var inputValue = parseFloat($("#inputValue").val());
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+
+        var numberOfBits = inputValue * selectedInputNumberOfBits;
+        var output = numberOfBits / selectedOutputNumberOfBits;
+        $("#outputValue").text(output);
+    }
+
+    $(document).ready(function() {
+        $("#drpInputSize .dropdown-item").click(function() {
+            var selectedValue = this.innerHTML
+            selectedInputNumberOfBits = parseInt($(this).attr("number-of-bits"));
+            $("#drpInputSize .dropdown-toggle").text(selectedValue);
+            convert();
+        });
+
+        $("#drpOutputSize .dropdown-item").click(function() {
+            var selectedValue = this.innerHTML
+            selectedOutputNumberOfBits = parseInt($(this).attr("number-of-bits"));
+            $("#drpOutputSize .dropdown-toggle").text(selectedValue);
+            convert();
+        });
+
+        $("#inputValue").keyup(function() {
+            convert();
         });
     });
 </script>
