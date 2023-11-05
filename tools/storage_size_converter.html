@@ -8,10 +8,24 @@ layout: default
 <br />
 {% include storage_size_dropdown_menu.html id="drpInputSize" %}
 <br />
-<input type="text" class="form-control w-50" value="0" />
+<input id="inputValue" type="number" class="form-control w-50" value="0" />
 <br />
 <hr class="mt-2 mb-3"/>
 <br />
-{% include storage_size_dropdown_menu.html id="drpInputSize" %}
+{% include storage_size_dropdown_menu.html id="drpOutputSize" %}
 <br />
-<h3>0</h3>
+<h3 id="outputValue">0</h3>
+
+<script>
+    $(document).ready(function() {
+        $("#inputValue").keyup(function() {
+            var inputValue = parseFloat($(this).val());
+            if (isNaN(inputValue)) {
+                inputValue = 0;
+            }
+
+            $("#outputValue").text(inputValue);
+            console.log(inputValue);
+        });
+    });
+</script>
