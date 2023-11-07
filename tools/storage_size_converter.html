@@ -12,13 +12,21 @@ layout: default
 <br />
 <hr class="mt-2 mb-3"/>
 <br />
-{% include storage_size_dropdown_menu.html id="drpOutputSize" %}
+<div class="d-flex flex-row">
+    <div class="p-2">
+        {% include storage_size_dropdown_menu.html id="drpOutputSize" %}
+    </div>
+    <div class="p-2">
+        <input type="button" class="form-control" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+    </div>
+  </div>
 <br />
 <h3 id="outputValue">0</h3>
 
 <script>
     let selectedInputNumberOfBits = 1;
     let selectedOutputNumberOfBits = 1;
+    let currentOutputValue = 0;
 
     function convert() {
         var inputValue = parseFloat($("#inputValue").val());
@@ -27,9 +35,13 @@ layout: default
         }
 
         var numberOfBits = inputValue * selectedInputNumberOfBits;
-        var output = numberOfBits / selectedOutputNumberOfBits;
-        $("#outputValue").text(output);
+        currentOutputValue = numberOfBits / selectedOutputNumberOfBits;
+        $("#outputValue").text(currentOutputValue.toLocaleString(undefined));
     }
+
+    $("#btnCopyToClipboard").click(function() {
+        navigator.clipboard.writeText(currentOutputValue);
+    });
 
     $(document).ready(function() {
         $("#drpInputSize .dropdown-item").click(function() {
