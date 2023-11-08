@@ -79,17 +79,41 @@
 
 <br />
 <h4>Decoded text</h4>
-<textarea class="form-control" placeholder="Enter decoded text here" id="txtDecodedText"></textarea>
+<textarea class="form-control" placeholder="Enter decoded text here" id="txtDecodedText" style="height: 10em;"></textarea>
 
 <br />
 <hr class="mt-2 mb-3"/>
 <br />
 
 <h4>Encoded text</h4>
-<textarea class="form-control" placeholder="Enter encoded text here" id="txtEncodedText"></textarea>
+<textarea class="form-control" placeholder="Enter encoded text here" id="txtEncodedText" style="height: 10em;"></textarea>
 
 <script>
-    
+    $("#txtDecodedText").keyup(function() {
+        try
+        {
+            var inputText = $("#txtDecodedText").val();
+            $("#txtEncodedText").val(encodeURI(inputText));
+            $("#txtEncodedText").attr("placeholder", "Enter decoded text here");
+        }
+        catch (error) {
+            $("#txtEncodedText").val("");
+            $("#txtEncodedText").attr("placeholder", "Error - invalid input");
+        }
+    });
+
+    $("#txtEncodedText").keyup(function() {
+        try
+        {
+            var inputText = $("#txtEncodedText").val();
+            $("#txtDecodedText").val(decodeURI(inputText));
+            $("#txtDecodedText").attr("placeholder", "Enter decoded text here");
+        }
+        catch (error) {
+            $("#txtDecodedText").val("");
+            $("#txtDecodedText").attr("placeholder", "Error - invalid input");
+        }
+    });
 </script>
     </div>
   </body>
