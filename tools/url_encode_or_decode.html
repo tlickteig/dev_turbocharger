@@ -19,7 +19,7 @@ layout: default
 <textarea class="form-control" placeholder="Enter encoded text here" id="txtEncodedText" style="height: 10em;"></textarea>
 
 <script>
-    $("#txtDecodedText").keyup(function() {
+    function encodeUri() {
         try
         {
             var inputText = $("#txtDecodedText").val();
@@ -30,9 +30,9 @@ layout: default
             $("#txtEncodedText").val("");
             $("#txtEncodedText").attr("placeholder", "Error - invalid input");
         }
-    });
+    }
 
-    $("#txtEncodedText").keyup(function() {
+    function decodeURI() {
         try
         {
             var inputText = $("#txtEncodedText").val();
@@ -43,5 +43,21 @@ layout: default
             $("#txtDecodedText").val("");
             $("#txtDecodedText").attr("placeholder", "Error - invalid input");
         }
+    }
+
+    $("#txtDecodedText").change(function() {
+        encodeUri();
+    });
+
+    $("#txtEncodedText").change(function() {
+        decodeURI();
+    });
+
+    $("#txtDecodedText").keyup(function() {
+        encodeUri();
+    });
+
+    $("#txtEncodedText").keyup(function() {
+        decodeURI();
     });
 </script>

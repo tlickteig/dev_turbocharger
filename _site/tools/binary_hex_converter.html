@@ -14,17 +14,17 @@
     <style>
       @font-face {
           font-family: Nunito-Black;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Black.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Black.ttf);
       }
       
       @font-face {
           font-family: Nunito-Light;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Light.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Light.ttf);
       }
 
       @font-face {
           font-family: Nunito-Regular;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Regular.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Regular.ttf);
       }
 
       * {
@@ -42,15 +42,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-    <title>{{ page.title }}</title>
+    <title>Binary/Hex Converter</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <meta name="description" content="{{ page.description }}">
+    <meta name="description" content="Convert back and forth between Decimal, Binary, and Hex values">
   </head>
   <body>
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid col-lg-10">
-          <a class="navbar-brand" href="{{ site.baseurl }}/">Dev Turbocharger</a>
+          <a class="navbar-brand" href="/dev_turbocharger/">Dev Turbocharger</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -61,13 +61,13 @@
                   Tools
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/storage_size_converter">Storage size converter</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/binary_hex_converter">Binary/Hex converter</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/storage_size_converter">Storage size converter</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/binary_hex_converter">Binary/Hex converter</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">GitHub</a>
+                <a class="nav-link active" aria-current="page" href="https://github.com/tlickteig/dev_turbocharger">GitHub</a>
               </li>
             </ul>
           </div>
@@ -75,7 +75,29 @@
       </nav>
     </header>
     <div id="dvContainer">
-      {{ content }}
+      <br />
+<h2>Decimal</h2>
+<input type="number" class="form-control w-100" placeholder="Enter decimal value here" id="txtDecimal" /> 
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<br />
+<h2>Binary</h2>
+<input type="number" class="form-control w-100" placeholder="Enter binary value here" id="txtDecimal" /> 
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<br />
+<h2>Hexadecimal</h2>
+<input type="number" class="form-control w-100" placeholder="Enter hex value here" id="txtDecimal" /> 
+
+<script>
+    
+</script>
     </div>
   </body>
 </html>
