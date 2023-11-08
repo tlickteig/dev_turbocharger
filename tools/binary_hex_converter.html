@@ -25,5 +25,15 @@ layout: default
 <input type="number" class="form-control w-100" placeholder="Enter hex value here" id="txtDecimal" /> 
 
 <script>
+    function convertDec() {
+        
+    }
     
+    $("#txtDecimal").keyup(function() {
+        convertDec();
+    });
+
+    $("#txtDecimal").change(function() {
+        convertDec();
+    });
 </script>
