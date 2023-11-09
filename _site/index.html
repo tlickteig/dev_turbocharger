@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head lang="en">
-    <script>
-      var html = document.querySelector("html");
-      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-      if (darkThemeMq.matches) {
-        html.setAttribute("data-bs-theme", "dark");
-      }
-      else {
-        html.setAttribute("data-bs-theme", "light");
-      }
-    </script>
     <style>
       @font-face {
           font-family: Nunito-Black;
-          src: url(/font/nunito/Nunito-Black.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Black.ttf);
       }
       
       @font-face {
           font-family: Nunito-Light;
-          src: url(/font/nunito/Nunito-Light.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Light.ttf);
       }
 
       @font-face {
           font-family: Nunito-Regular;
-          src: url(/font/nunito/Nunito-Regular.ttf);
+          src: url(/dev_turbocharger/font/nunito/Nunito-Regular.ttf);
       }
 
       @font-face {
         font-family: Fa-Regular;
-        src: url(/font/fontawesome/fa_regular_400.ttf);
+        src: url(/dev_turbocharger/font/fontawesome/fa_regular_400.ttf);
+      }
+
+      @font-face {
+        font-family: Fa-Brands;
+        src: url(/dev_turbocharger/font/fontawesome/fa_brands_400.ttf);
       }
 
       * {
@@ -49,10 +44,6 @@
         width: 50%;
         padding: 10px;
       }
-
-      #lblDarkModeIcon {
-        font-family: Fa-Regular;
-      }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +58,7 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid col-lg-10">
-          <a class="navbar-brand" href="/">Dev Turbocharger</a>
+          <a class="navbar-brand" href="/dev_turbocharger/">Dev Turbocharger</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -75,22 +66,43 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span style="font-family: Fa-Regular">&#xf7d9;</span>
                   Tools
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/tools/storage_size_converter">Storage size converter</a></li>
-                  <li><a class="dropdown-item" href="/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
-                  <li><a class="dropdown-item" href="/tools/binary_hex_converter">Binary/Hex converter</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/storage_size_converter">Storage size converter</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
+                  <li><a class="dropdown-item" href="/dev_turbocharger/tools/binary_hex_converter">Binary/Hex converter</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span style="font-family: Fa-Regular">&#xe4e5;</span>
+                  System theme
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xe4e5;</span>--> System theme
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xf185;</span>--> Light
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xf186;</span>--> Dark
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/jekyll">GitHub</a>
-              </li>
-              <li class="nav-item">
-                <div class="form-check form-switch vertical-center">
-                  <label class="form-check-label" for="flexSwitchCheckDefault" id="lblDarkModeIcon">&#xf186;</label>
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                </div>
+                <a class="nav-link active" aria-current="page" href="https://github.com/tlickteig/dev_turbocharger">
+                  <span style="font-family: Fa-Brands">&#xf09b;</span>
+                  GitHub
+                </a>
               </li>
             </ul>
           </div>
@@ -103,10 +115,20 @@
 <p>Select a tool from the links below</p>
 
 <ul>
-  <li><a href="/tools/storage_size_converter">Storage Size converter</a></li>
-  <li><a href="/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
-  <li><a href="/tools/binary_hex_converter">Binary/Hex converter</a></li>
+  <li><a href="/dev_turbocharger/tools/storage_size_converter">Storage Size converter</a></li>
+  <li><a href="/dev_turbocharger/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
+  <li><a href="/dev_turbocharger/tools/binary_hex_converter">Binary/Hex converter</a></li>
 </ul>
     </div>
+    <script>
+      var html = document.querySelector("html");
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkThemeMq.matches) {
+        html.setAttribute("data-bs-theme", "dark");
+      }
+      else {
+        html.setAttribute("data-bs-theme", "light");
+      }
+    </script>
   </body>
 </html>
