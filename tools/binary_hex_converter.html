@@ -14,7 +14,7 @@ layout: default
 
 <br />
 <h2>Binary</h2>
-<input type="number" class="form-control w-100" placeholder="Enter binary value here" id="txtDecimal" /> 
+<input type="number" class="form-control w-100" placeholder="Enter binary value here" id="txtBinary" /> 
 
 <br />
 <hr class="mt-2 mb-3"/>
@@ -22,11 +22,18 @@ layout: default
 
 <br />
 <h2>Hexadecimal</h2>
-<input type="number" class="form-control w-100" placeholder="Enter hex value here" id="txtDecimal" /> 
+<input type="text" class="form-control w-100" placeholder="Enter hex value here" id="txtHexadecimal" /> 
 
 <script>
     function convertDec() {
-        
+        var input = parseInt($("#txtDecimal").val());
+        if (isNaN(input))
+        {
+            input = 0;
+        }
+
+        $("#txtBinary").val(input.toString(2));
+        $("#txtHexadecimal").val(input.toString(16));
     }
     
     $("#txtDecimal").keyup(function() {
@@ -35,5 +42,49 @@ layout: default
 
     $("#txtDecimal").change(function() {
         convertDec();
+    });
+
+    function convertBinary() {
+        var input = $("#txtBinary").val();
+        input = input.replace(/[^10]/g, '');
+        $("#txtBinary").val(input);
+
+        input = parseInt($("#txtBinary").val(), 2);
+        if (isNaN(input)) {
+            input = 0;
+        }
+
+        $("#txtDecimal").val(input);
+        $("#txtHexadecimal").val(input.toString(16));
+    }
+
+    $("#txtBinary").keyup(function() {
+        convertBinary();
+    });
+
+    $("#txtBinary").change(function() {
+        convertBinary();
+    });
+
+    function convertHex() {
+        var input = $("#txtHexadecimal").val();
+        input = input.replace(/[^0-9a-f]/g, '');
+        $("#txtHexadecimal").val(input);
+
+        input = parseInt($("#txtHexadecimal").val(), 16);
+        if (isNaN(input)) {
+            input = 0;
+        }
+
+        $("#txtDecimal").val(input);
+        $("#txtBinary").val(input.toString(2));
+    }
+
+    $("#txtHexadecimal").keyup(function() {
+        convertHex();
+    });
+
+    $("#txtHexadecimal").change(function() {
+        convertHex();
     });
 </script>
