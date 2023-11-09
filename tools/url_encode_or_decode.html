@@ -32,7 +32,7 @@ layout: default
         }
     }
 
-    function decodeURI() {
+    function decodeUri() {
         try
         {
             var inputText = $("#txtEncodedText").val();
@@ -50,7 +50,7 @@ layout: default
     });
 
     $("#txtEncodedText").change(function() {
-        decodeURI();
+        decodeUri();
     });
 
     $("#txtDecodedText").keyup(function() {
@@ -58,6 +58,6 @@ layout: default
     });
 
     $("#txtEncodedText").keyup(function() {
-        decodeURI();
+        decodeUri();
     });
 </script>
