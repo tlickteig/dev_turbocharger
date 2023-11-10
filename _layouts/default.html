@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head lang="en">
-    <script>
-      var html = document.querySelector("html");
-      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-      if (darkThemeMq.matches) {
-        html.setAttribute("data-bs-theme", "dark");
-      }
-      else {
-        html.setAttribute("data-bs-theme", "light");
-      }
-    </script>
     <style>
       @font-face {
           font-family: Nunito-Black;
@@ -27,8 +17,26 @@
           src: url({{ site.baseurl }}/font/nunito/Nunito-Regular.ttf);
       }
 
+      @font-face {
+        font-family: Fa-Regular;
+        src: url({{ site.baseurl }}/font/fontawesome/fa_regular_400.ttf);
+      }
+
+      @font-face {
+        font-family: Fa-Brands;
+        src: url({{ site.baseurl }}/font/fontawesome/fa_brands_400.ttf);
+      }
+
       * {
         font-family: Nunito-Regular;
+      }
+
+      .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
       }
 
       #dvContainer {
@@ -58,6 +66,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span style="font-family: Fa-Regular">&#xf7d9;</span>
                   Tools
                 </a>
                 <ul class="dropdown-menu">
@@ -67,7 +76,33 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">GitHub</a>
+                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
+                  <span style="font-family: Fa-Brands">&#xf09b;</span>
+                  GitHub
+                </a>
+              </li>
+              <li class="nav-item dropdown" id="liThemeMenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id="spnThemeIcon" style="font-family: Fa-Regular">&#xe4e5;</span>
+                  <span id="spnThemeLabel">System theme</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xe4e5;</span>--> System theme
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xf185;</span>--> Light
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item">
+                      <!--<span style="font-family: Fa-Regular">&#xf186;</span>--> Dark
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -77,5 +112,60 @@
     <div id="dvContainer">
       {{ content }}
     </div>
+    <script>
+      var html = document.querySelector("html");
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+      var selectedTheme = localStorage.getItem("selectedTheme");
+      if (selectedTheme == null) {
+        selectedTheme = "System theme"
+      }
+
+      if (selectedTheme == "Light") {
+        html.setAttribute("data-bs-theme", "light");
+      }  else if (selectedTheme == "Dark") {
+        html.setAttribute("data-bs-theme", "dark");
+      } else {
+        if (darkThemeMq.matches) {
+          html.setAttribute("data-bs-theme", "dark");
+        }
+        else {
+          html.setAttribute("data-bs-theme", "light");
+        }
+      } 
+
+      $(document).ready(function() {
+        $("#spnThemeLabel").text(selectedTheme);
+        if (selectedTheme == "Light") {
+          $("#spnThemeIcon").text("\uf185");
+        } else if (selectedTheme == "Dark") {
+          $("#spnThemeIcon").text("\uf186");
+        } else {
+          $("#spnThemeIcon").text("\ue4e5");
+        }
+
+        $("#liThemeMenu .dropdown-item").click(function() {
+          var selectedTheme = $(this).text().trim();
+          localStorage.setItem("selectedTheme", selectedTheme);
+          $("#spnThemeLabel").text(selectedTheme);
+          if (selectedTheme == "Light") {
+            $("#spnThemeIcon").text("\uf185");
+            html.setAttribute("data-bs-theme", "light");
+          }
+          else if (selectedTheme == "Dark") {
+            $("#spnThemeIcon").text("\uf186");
+            html.setAttribute("data-bs-theme", "dark");
+          }
+          else {
+            $("#spnThemeIcon").text("\ue4e5");
+            if (darkThemeMq.matches) {
+              html.setAttribute("data-bs-theme", "dark");
+            }
+            else {
+              html.setAttribute("data-bs-theme", "light");
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
