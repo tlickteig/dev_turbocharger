@@ -75,10 +75,16 @@
                   <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/binary_hex_converter">Binary/Hex converter</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
+                  <span style="font-family: Fa-Brands">&#xf09b;</span>
+                  GitHub
+                </a>
+              </li>
+              <li class="nav-item dropdown" id="liThemeMenu">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span style="font-family: Fa-Regular">&#xe4e5;</span>
-                  System theme
+                  <span id="spnThemeIcon" style="font-family: Fa-Regular">&#xe4e5;</span>
+                  <span id="spnThemeLabel">System theme</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
@@ -98,12 +104,6 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
-                  <span style="font-family: Fa-Brands">&#xf09b;</span>
-                  GitHub
-                </a>
-              </li>
             </ul>
           </div>
         </div>
@@ -115,12 +115,54 @@
     <script>
       var html = document.querySelector("html");
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-      if (darkThemeMq.matches) {
-        html.setAttribute("data-bs-theme", "dark");
-      }
-      else {
+      var selectedTheme = localStorage.getItem("selectedTheme");
+
+      if (selectedTheme == "Light") {
         html.setAttribute("data-bs-theme", "light");
-      }
+      }  else if (selectedTheme == "Dark") {
+        html.setAttribute("data-bs-theme", "dark");
+      } else {
+        if (darkThemeMq.matches) {
+          html.setAttribute("data-bs-theme", "dark");
+        }
+        else {
+          html.setAttribute("data-bs-theme", "light");
+        }
+      } 
+
+      $(document).ready(function() {
+        $("#spnThemeLabel").text(selectedTheme);
+        if (selectedTheme == "Light") {
+          $("#spnThemeIcon").text("\uf185");
+        } else if (selectedTheme == "Dark") {
+          $("#spnThemeIcon").text("\uf186");
+        } else {
+          $("#spnThemeIcon").text("\ue4e5");
+        }
+
+        $("#liThemeMenu .dropdown-item").click(function() {
+          var selectedTheme = $(this).text().trim();
+          localStorage.setItem("selectedTheme", selectedTheme);
+          $("#spnThemeLabel").text(selectedTheme);
+          if (selectedTheme == "Light") {
+            $("#spnThemeIcon").text("\uf185");
+            html.setAttribute("data-bs-theme", "light");
+          }
+          else if (selectedTheme == "Dark") {
+            $("#spnThemeIcon").text("\uf186");
+            html.setAttribute("data-bs-theme", "dark");
+          }
+          else {
+            $("#spnThemeIcon").text("\ue4e5");
+            if (darkThemeMq.matches) {
+              html.setAttribute("data-bs-theme", "dark");
+            }
+            else {
+              html.setAttribute("data-bs-theme", "light");
+            }
+          }
+        });
+      });
     </script>
   </body>
 </html>
