@@ -116,6 +116,9 @@
       var html = document.querySelector("html");
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
       var selectedTheme = localStorage.getItem("selectedTheme");
+      if (selectedTheme == null) {
+        selectedTheme = "System theme"
+      }
 
       if (selectedTheme == "Light") {
         html.setAttribute("data-bs-theme", "light");
