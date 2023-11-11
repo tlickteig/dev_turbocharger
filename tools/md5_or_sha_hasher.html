@@ -7,3 +7,36 @@ layout: default
 <br />
 <h2>MD5/SHA hasher</h2>
 
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                MD5
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item">MD5</a></li>
+                <li><a class="dropdown-item">SHA0</a></li>
+                <li><a class="dropdown-item">SHA1</a></li>
+                <li><a class="dropdown-item">SHA224</a></li>
+                <li><a class="dropdown-item">SHA256</a></li>
+                <li><a class="dropdown-item">SHA384</a></li>
+                <li><a class="dropdown-item">SHA512</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<br />
+<input id="inputValue" type="text" class="form-control" placeholder="Enter your text here" />
+
+<br />
+<hr class="mt-2 mb-3"/>
+
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <input type="button" class="form-control" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+    </div>
+</div>
+
+<br />
+<input id="outputValue" type="text" class="form-control" placeholder="Output" disabled/>
