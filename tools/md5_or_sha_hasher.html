@@ -4,22 +4,24 @@ description: convert strings into MD5 or various different SHA hashes
 layout: default
 ---
 
+<script src="{{ site.baseurl }}/lib/crypto/md5.min.js"></script>
+<script src="{{ site.baseurl }}/lib/crypto/sha1.min.js"></script>
+<script src="{{ site.baseurl }}/lib/crypto/sha256.min.js"></script>
+<script src="{{ site.baseurl }}/lib/crypto/sha512.min.js"></script>
+
 <br />
 <h2>MD5/SHA hasher</h2>
 
 <div class="d-flex flex-row">
     <div class="p-2">
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="dropdown" id="dvAlgorithmDropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="selectedAlgorithm">
                 MD5
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item">MD5</a></li>
-                <li><a class="dropdown-item">SHA0</a></li>
                 <li><a class="dropdown-item">SHA1</a></li>
-                <li><a class="dropdown-item">SHA224</a></li>
                 <li><a class="dropdown-item">SHA256</a></li>
-                <li><a class="dropdown-item">SHA384</a></li>
                 <li><a class="dropdown-item">SHA512</a></li>
             </ul>
         </div>
@@ -39,4 +41,53 @@ layout: default
 </div>
 
 <br />
-<input id="outputValue" type="text" class="form-control" placeholder="Output" disabled/>
+<textarea id="outputValue" class="form-control" placeholder="Output" disabled style="height: 5em"></textarea>
+
+<script>
+    function doTheHashing() {
+
+        var algorithm = $("#selectedAlgorithm").text().trim();
+        var output = "";
+        var input = $("#inputValue").val();
+
+        if (input != "")
+        {
+            switch (algorithm) {
+                case "MD5":
+                    output = md5(input);
+                    break;
+                case "SHA1":
+                    output = sha1(input);
+                    break;
+                case "SHA256":
+                    output = sha256(input);
+                    break;
+                case "SHA512":
+                    output = sha512(input);
+                    break;
+            }
+        }
+
+        $("#outputValue").val(output);
+    }
+
+    $(document).ready(function() {
+        $("#dvAlgorithmDropdown .dropdown-item").click(function() {
+            var selectedValue = this.innerHTML
+            $("#dvAlgorithmDropdown .dropdown-toggle").text(selectedValue);
+            doTheHashing();
+        });
+
+        $("#inputValue").keyup(function() {
+            doTheHashing();
+        });
+
+        $("#inputValue").change(function() {
+            doTheHashing();
+        });
+
+        $("#btnCopyToClipboard").click(function() {
+            navigator.clipboard.writeText($("#outputValue").val());
+        });
+    });
+</script>
