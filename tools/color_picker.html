@@ -4,7 +4,92 @@ description: Convert between Hex/RGB values, in addition to making colors with s
 layout: default
 ---
 
+<script src="{{ site.baseurl }}/lib/color/color.js"></script>
+
 <br />
 <h2>Color Picker</h2>
 
-<input type="range" class="form-range" id="customRange1" style="transform: rotate(270deg);">
+<div class="d-flex flex-row justify-content-center">
+    <div class="p-2 w-75">
+        <input type="range" class="form-range" id="rngRedSlider" max="255" value="0">
+    </div>
+    <div class="p-2">
+        <p id="pRedValue">R: 0</p>
+    </div>
+</div>
+
+<div class="d-flex flex-row justify-content-center">
+    <div class="p-2 w-75">
+        <input type="range" class="form-range" id="rngGreenSlider" max="255" value="0">
+    </div>
+    <div class="p-2">
+        <p id="pGreenValue">G: 0</p>
+    </div>
+</div>
+
+<div class="d-flex flex-row justify-content-center">
+    <div class="p-2 w-75">
+        <input type="range" class="form-range" id="rngBlueSlider" max="255" value="0">
+    </div>
+    <div class="p-2">
+        <p id="pBlueValue">B: 0</p>
+    </div>
+</div>
+
+<input type="color" id="clrInputColor" class="form-control form-control-color w-100" style="height: 3em" />
+
+<script>
+    import Color from "https://colorjs.io/dist/color.js";
+    const RED_SLIDER = "#rngRedSlider";
+    const BLUE_SLIDER = "#rngBlueSlider";
+    const GREEN_SLIDER = "#rngGreenSlider";
+
+    function setColor(hexColor) {
+        console.log(hexColor);
+
+        $("#clrInputColor").val(hexColor);
+    }
+
+    $(document).ready(function() {
+        $(`${RED_SLIDER}, ${GREEN_SLIDER}, ${BLUE_SLIDER}`).on("input change", (e) => {
+            var red = $(RED_SLIDER).val();
+            var green = $(GREEN_SLIDER).val();
+            var blue = $(BLUE_SLIDER).val();
+
+            /*var rgb = `rgb(${red}, ${green}, ${blue})`;
+            const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+                const hex = x.toString(16)
+                return hex.length === 1 ? '0' + hex : hex
+            }).join('');
+            var hex = rgbToHex(red, green, blue);*/
+
+            setColor(hex);
+        });
+    });
+</script>
+
+<style>
+    #rngRedSlider::-webkit-slider-thumb {
+        background: red;
+    }
+
+    #rngRedSlider::-moz-range-thumb {
+        background: red;
+    }
+
+    #rngGreenSlider::-webkit-slider-thumb {
+        background: green;
+    }
+
+    #rngGreenSlider::-moz-range-thumb {
+        background: green;
+    }
+
+    #rngBlueSlider::-webkit-slider-thumb {
+        background: blue;
+    }
+
+    #rngBlueSlider::-moz-range-thumb {
+        background: blue;
+    }
+</style>
