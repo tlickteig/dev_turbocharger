@@ -4,7 +4,7 @@ description: Convert between Hex/RGB values, in addition to making colors with s
 layout: default
 ---
 
-<script src="{{ site.baseurl }}/lib/color/color.js"></script>
+<script src="{{ site.baseurl }}/lib/color/color.js" type="module"></script>
 
 <br />
 <h2>Color Picker</h2>
@@ -38,16 +38,16 @@ layout: default
 
 <input type="color" id="clrInputColor" class="form-control form-control-color w-100" style="height: 3em" />
 
-<script>
+<script type="module">
     import Color from "https://colorjs.io/dist/color.js";
     const RED_SLIDER = "#rngRedSlider";
     const BLUE_SLIDER = "#rngBlueSlider";
     const GREEN_SLIDER = "#rngGreenSlider";
 
-    function setColor(hexColor) {
-        console.log(hexColor);
+    function setColor(color) {
+        console.log(color.toString({ format: "hex" }));
 
-        $("#clrInputColor").val(hexColor);
+        $("#clrInputColor").val(color.toString());
     }
 
     $(document).ready(function() {
@@ -55,7 +55,8 @@ layout: default
             var red = $(RED_SLIDER).val();
             var green = $(GREEN_SLIDER).val();
             var blue = $(BLUE_SLIDER).val();
-
+            
+            //var color = new Color("srgb", [red, green, blue]);
             /*var rgb = `rgb(${red}, ${green}, ${blue})`;
             const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
                 const hex = x.toString(16)
@@ -63,7 +64,8 @@ layout: default
             }).join('');
             var hex = rgbToHex(red, green, blue);*/
 
-            setColor(hex);
+            var rgb = `rgb(${red}, ${green}, ${blue})`;
+            setColor(rgb);
         });
     });
 </script>
