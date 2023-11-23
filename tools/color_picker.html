@@ -143,6 +143,10 @@ layout: default
             $(BLUE_SLIDER).val(blue);
             $(COLOR_PICKER).val(`#${redHex}${greenHex}${blueHex}`);
         });
+
+        $("#btnCopyToClipboard").click(function() {
+            navigator.clipboard.writeText($(HEX_VALUE).val());
+        });
     });
 </script>
 
