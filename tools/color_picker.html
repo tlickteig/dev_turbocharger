@@ -4,7 +4,7 @@ description: Convert between Hex/RGB values, in addition to making colors with s
 layout: default
 ---
 
-<script src="{{ site.baseurl }}/lib/color/color.js" type="module"></script>
+<!--<script src="{{ site.baseurl }}/lib/color/color.js" type="module"></script>-->
 
 <br />
 <h2>Color Picker</h2>
@@ -38,34 +38,39 @@ layout: default
 
 <input type="color" id="clrInputColor" class="form-control form-control-color w-100" style="height: 3em" />
 
-<script type="module">
-    import Color from "https://colorjs.io/dist/color.js";
+<script>
     const RED_SLIDER = "#rngRedSlider";
     const BLUE_SLIDER = "#rngBlueSlider";
     const GREEN_SLIDER = "#rngGreenSlider";
 
-    function setColor(color) {
-        console.log(color.toString({ format: "hex" }));
-
-        $("#clrInputColor").val(color.toString());
-    }
+    const RED_LABEL = "#pRedValue";
+    const GREEN_LABEL = "#pGreenValue";
+    const BLUE_LABEL = "#pBlueValue";
 
     $(document).ready(function() {
         $(`${RED_SLIDER}, ${GREEN_SLIDER}, ${BLUE_SLIDER}`).on("input change", (e) => {
-            var red = $(RED_SLIDER).val();
-            var green = $(GREEN_SLIDER).val();
-            var blue = $(BLUE_SLIDER).val();
-            
-            //var color = new Color("srgb", [red, green, blue]);
-            /*var rgb = `rgb(${red}, ${green}, ${blue})`;
-            const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
-                const hex = x.toString(16)
-                return hex.length === 1 ? '0' + hex : hex
-            }).join('');
-            var hex = rgbToHex(red, green, blue);*/
+            var red = parseInt($(RED_SLIDER).val()).toString(16);
+            var green = parseInt($(GREEN_SLIDER).val()).toString(16);
+            var blue = parseInt($(BLUE_SLIDER).val()).toString(16);
 
-            var rgb = `rgb(${red}, ${green}, ${blue})`;
-            setColor(rgb);
+            if (red.length == 1) {
+                red = "0" + red;
+            }
+
+            if (green.length == 1) {
+                green = "0" + green;
+            }
+
+            if (blue.length == 1) {
+                blue = "0" + blue;
+            }
+
+            $(RED_LABEL).text(`R: ${$(RED_SLIDER).val()}`);
+            $(GREEN_LABEL).text(`G: ${$(GREEN_SLIDER).val()}`);
+            $(BLUE_LABEL).text(`B: ${$(BLUE_SLIDER).val()}`);
+
+            var hex = `#${red}${green}${blue}`;
+            $("#clrInputColor").val(hex);
         });
     });
 </script>
