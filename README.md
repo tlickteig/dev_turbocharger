@@ -14,13 +14,13 @@
     - SHA1
     - SHA256
     - SHA512
+6. A color picker
 
 ### Tools I plan to add in the future:
 
 1. XML and JSON validator
 2. AES encryption utility
 3. SQL validator
-4. Color picker
 5. Regex builder/validator
 
 ### Contributing
