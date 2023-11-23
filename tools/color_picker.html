@@ -47,6 +47,7 @@ layout: default
     </div>
 </div>
 
+<p></p>
 <input type="text" class="form-control" placeholder="Enter Hex value here" id="txtHexValue" value="#000000" /> 
 
 <script>
@@ -111,29 +112,27 @@ layout: default
         $(HEX_VALUE).on("input change", (e) => {
             var input = $(HEX_VALUE).val();
             input = input.replace(/[^0-9a-f#]/g, '');
+            input = input.substring(0, 7);
             $(HEX_VALUE).val(input);
+            input = input.replace("#", "");
 
-            var red = 0;
-            var green = 0;
-            var blue = 0;
+            var redHex = "00";
+            var greenHex = "00";
+            var blueHex = "00";
 
             if (input.length == 3) {
-                var redHex = input.charAt(0).repeat(2);
-                var greenHex = input.charAt(1).repeat(2);
-                var blueHex = input.charAt(2).repeat(2);
-
-                red = parseInt(redHex, 16);
-                green = parseInt(greenHex, 16);
-                blue = parseInt(blueHex, 16);
+                redHex = input.charAt(0).repeat(2);
+                greenHex = input.charAt(1).repeat(2);
+                blueHex = input.charAt(2).repeat(2);
             } else if (input.length == 6) {
-                var redHex = input.substring(1, 3);
-                var greenHex = input.substring(3, 5);
-                var blueHex = input.substring(5, 7);
-
-                red = parseInt(redHex, 16);
-                green = parseInt(greenHex, 16);
-                blue = parseInt(blueHex, 16);
+                redHex = input.substring(0, 2);
+                greenHex = input.substring(2, 4);
+                blueHex = input.substring(4, 6);    
             }
+
+            var red = parseInt(redHex, 16);
+            var green = parseInt(greenHex, 16);
+            var blue = parseInt(blueHex, 16);
 
             $(RED_LABEL).text(`R: ${red}`);
             $(GREEN_LABEL).text(`G: ${green}`);
@@ -142,47 +141,7 @@ layout: default
             $(RED_SLIDER).val(red);
             $(GREEN_SLIDER).val(green);
             $(BLUE_SLIDER).val(blue);
-
-            //$(COLOR_PICKER).val(`#${hex}`);
-
-
-            /*var hexParsed = parseInt(hex, 16);
-            if (!isNaN(hexParsed)) {
-                var red = `${(hexParsed >> 16) & 255}`;
-                var green = `${(hexParsed >> 8) & 255}`;
-                var blue = `${hexParsed & 255}`;
-
-                $(RED_LABEL).text(`R: ${red}`);
-                $(GREEN_LABEL).text(`G: ${green}`);
-                $(BLUE_LABEL).text(`B: ${blue}`);
-
-                $(RED_SLIDER).val(red);
-                $(GREEN_SLIDER).val(green);
-                $(BLUE_SLIDER).val(blue);
-                $(COLOR_PICKER).val(`#${hex}`);
-            }*/
-
-            /*var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            var rgb = result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : null;
-            
-            if (rgb != null) {
-                var red = rgb.r;
-                var green = rgb.g;
-                var blue = rgb.b;
-
-                $(RED_LABEL).text(`R: ${red}`);
-                $(GREEN_LABEL).text(`G: ${green}`);
-                $(BLUE_LABEL).text(`B: ${blue}`);
-
-                $(RED_SLIDER).val(red);
-                $(GREEN_SLIDER).val(green);
-                $(BLUE_SLIDER).val(blue);
-                $(COLOR_PICKER).val(`#${hex}`);
-            }*/
+            $(COLOR_PICKER).val(`#${redHex}${greenHex}${blueHex}`);
         });
     });
 </script>
