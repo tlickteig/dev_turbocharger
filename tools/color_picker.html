@@ -4,8 +4,6 @@ description: Convert between Hex/RGB values, in addition to making colors with s
 layout: default
 ---
 
-<!--<script src="{{ site.baseurl }}/lib/color/color.js" type="module"></script>-->
-
 <br />
 <h2>Color Picker</h2>
 
@@ -47,6 +45,8 @@ layout: default
     const GREEN_LABEL = "#pGreenValue";
     const BLUE_LABEL = "#pBlueValue";
 
+    const COLOR_PICKER = "#clrInputColor";
+
     $(document).ready(function() {
         $(`${RED_SLIDER}, ${GREEN_SLIDER}, ${BLUE_SLIDER}`).on("input change", (e) => {
             var red = parseInt($(RED_SLIDER).val()).toString(16);
@@ -70,7 +70,28 @@ layout: default
             $(BLUE_LABEL).text(`B: ${$(BLUE_SLIDER).val()}`);
 
             var hex = `#${red}${green}${blue}`;
-            $("#clrInputColor").val(hex);
+            $(COLOR_PICKER).val(hex);
+        });
+
+        $(COLOR_PICKER).on("input change", (e) => {
+            var hex = $(COLOR_PICKER).val();
+            var redHex = hex.substring(1, 3);
+            var greenHex = hex.substring(3, 5);
+            var blueHex = hex.substring(5, 7);
+
+            var red = parseInt(redHex, 16);
+            var green = parseInt(greenHex, 16);
+            var blue = parseInt(blueHex, 16);
+
+            $(RED_LABEL).text(`R: ${red}`);
+            $(GREEN_LABEL).text(`G: ${green}`);
+            $(BLUE_LABEL).text(`B: ${blue}`);
+
+            $(RED_SLIDER).val(red);
+            $(GREEN_SLIDER).val(green);
+            $(BLUE_SLIDER).val(blue);
+
+            console.log(hex);
         });
     });
 </script>
