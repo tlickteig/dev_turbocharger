@@ -5,6 +5,7 @@ layout: default
 ---
 
 <!--<script src="{{ site.baseurl }}/lib/cryptojs/aes.js"></script>-->
+<script src="{{ site.baseurl }}/lib/crypto/cryptojs.js"></script>
 
 <br />
 <h2>AES Encryption utility</h2>
@@ -16,16 +17,16 @@ layout: default
     <div class="p-2">
         <div class="dropdown" id="dvAlgorithmDropdown">
             <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="selectedAlgorithm">
-                AES256
+                AES 256 bit
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item">AES256</a></li>
+                <li><a class="dropdown-item">AES 256 bit</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<!--<div class="d-flex flex-row">
+<div class="d-flex flex-row">
     <div class="p-2">
         <h4>Mode: </h4>
     </div>
@@ -39,13 +40,16 @@ layout: default
             </ul>
         </div>
     </div>
-</div>-->
+</div>
 
 <br />
 <input id="inputValue" type="text" class="form-control" placeholder="Enter text here" />
 
 <br />
 <input id="inputKeyValue" type="text" class="form-control" placeholder="Enter encryption key" />
+
+<br />
+<input id="inputIvValue" type="text" class="form-control" placeholder="Enter IV (optional)" />
 
 <br />
 <hr class="mt-2 mb-3"/>
@@ -60,25 +64,9 @@ layout: default
 <textarea id="outputValue" class="form-control" placeholder="Output" disabled style="height: 5em"></textarea>
 
 <script>
-    async function encrypt256CBC(message, secret) {
-        const encodedMessage = new TextEncoder().encode(message);
-        const cryptoKey = await window.crypto.subtle.importKey(
-            'raw',
-            key,
-            { name: 'AES-CBC' },
-            false,
-            ['encrypt']
-        );
-        const iv = window.crypto.getRandomValues(new Uint8Array(16));
-        const encryptedBuffer = await window.crypto.subtle.encrypt(
-            { name: 'AES-CBC', iv },
-            cryptoKey,
-            encodedMessage
-        );
-        const encryptedArray = new Uint8Array(encryptedBuffer);
-        const result = new Uint8Array(iv.length + encryptedArray.length);
-        result.set(iv);
-        result.set(encryptedArray, iv.length);
-        return result;
+    function encrypt256CBC(message, key, iv) {
+        var encrypted = CryptoJS.AES.encrypt(message, key, { mode: CryptoJS.mode.CBC, iv: iv });
+        console.log(encrypted.toString());
+        return encrypted.toString();
     }
 </script>
