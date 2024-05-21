@@ -22,6 +22,7 @@
 2. AES encryption utility
 3. SQL validator
 5. Regex builder/validator
+6. User Agent parser
 
 ### Contributing
 
