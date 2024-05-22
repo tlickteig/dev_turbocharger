@@ -31,7 +31,7 @@ layout: default
         <h4>Operating System: </h4>
     </div>
     <div class="p-2">
-        <h4 id="h4Browser">Unknown</h4>
+        <h4 id="h4OperatingSystem">Unknown</h4>
     </div>
 </div>
 
@@ -40,6 +40,49 @@ layout: default
         <h4>Device: </h4>
     </div>
     <div class="p-2">
-        <h4 id="h4Browser">Unknown</h4>
+        <h4 id="h4Device">Unknown</h4>
     </div>
 </div>
+
+<script>
+    function updateUserAgent() {
+        var userAgent = $("#txtUserAgent").val();
+        var info = platform.parse(userAgent);
+
+        var browserInfo = "Unknown";
+        var osInfo = "Unknown";
+        var deviceInfo = "Unknown";
+
+        if (userAgent != "") {
+            if (platform.name) {
+                browserInfo = platform.name
+            }
+
+            if (platform.name && platform.version) {
+                browserInfo = browserInfo + " version " + platform.version
+            }
+
+            if (platform.product != "" && platform.manufacturer != "") {
+                deviceinfo = platform.manufacturer + " " + platform.product;
+            }
+        }
+
+        $("#h4Browser").text(browserInfo);        
+    }
+
+    $(document).ready(function () {
+        $("#txtUserAgent").keyup(function() {
+            updateUserAgent();
+        })
+
+        $("#txtUserAgent").change(function() {
+            updateUserAgent();
+        });
+
+        var userAgent = platform.ua;
+        if (userAgent) {
+            $("#txtUserAgent").val(userAgent);
+            updateUserAgent();
+        }
+    });
+</script>
