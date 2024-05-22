@@ -54,20 +54,26 @@ layout: default
         var deviceInfo = "Unknown";
 
         if (userAgent != "") {
-            if (platform.name) {
-                browserInfo = platform.name
+            if (info.name) {
+                browserInfo = info.name
             }
 
-            if (platform.name && platform.version) {
-                browserInfo = browserInfo + " version " + platform.version
+            if (info.name && info.version) {
+                browserInfo = browserInfo + " version " + info.version
             }
 
-            if (platform.product != "" && platform.manufacturer != "") {
-                deviceinfo = platform.manufacturer + " " + platform.product;
+            if (info.product != "" && info.manufacturer != "") {
+                deviceinfo = info.manufacturer + " " + info.product;
+            }
+
+            if (info.os && info.os != "null") {
+                osInfo = info.os;
             }
         }
 
-        $("#h4Browser").text(browserInfo);        
+        $("#h4Browser").text(browserInfo);
+        $("#h4OperatingSystem").text(osInfo);
+        $("#h4Device").text(deviceInfo);
     }
 
     $(document).ready(function () {
