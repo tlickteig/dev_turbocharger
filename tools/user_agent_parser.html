@@ -5,6 +5,7 @@ layout: default
 ---
 
 <script src="{{ site.baseurl }}/lib/platform/platform.js"></script>
+<script src="{{ site.baseurl }}/lib/uaparser/uaparser.js"></script>
 
 <br />
 <h2>User Agent Parser</h2>
@@ -53,22 +54,16 @@ layout: default
         var osInfo = "Unknown";
         var deviceInfo = "Unknown";
 
-        if (userAgent != "") {
-            if (info.name) {
-                browserInfo = info.name
-            }
+        var uap = new UAParser();
+        uap.setUA(userAgent);
+        var result = uap.getResult();
 
-            if (info.name && info.version) {
-                browserInfo = browserInfo + " version " + info.version
-            }
+        browserInfo = result.browser;
+        osInfo = result.os;
+        deviceInfo = result.device;
 
-            if (info.product != "" && info.manufacturer != "") {
-                deviceinfo = info.manufacturer + " " + info.product;
-            }
-
-            if (info.os && info.os != "null") {
-                osInfo = info.os;
-            }
+        if (deviceInfo == "undefined") {
+            deviceInfo = "Unknown";
         }
 
         $("#h4Browser").text(browserInfo);
