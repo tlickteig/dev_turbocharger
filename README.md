@@ -16,6 +16,7 @@
     - SHA512
 6. A color picker
 7. User Agent parser
+8. Secure password generator
 
 ### Tools I plan to add in the future:
 
@@ -23,6 +24,7 @@
 2. AES encryption utility
 3. SQL validator
 5. Regex builder/validator
+6. Ascii table
 
 ### Contributing
 
