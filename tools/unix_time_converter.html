@@ -1,0 +1,143 @@
+---
+title: Unix time converter
+description: Convert back and forth between Unix timestamps and formatted dates
+layout: default
+---
+
+<style>
+    #tblHorizontalButtons td {
+        text-align: center;
+    }
+
+    #tblHorizontalButtons td input {
+        text-align: center;
+        width: 2em;
+    }
+</style>
+
+<br />
+<h2>Unix time converter</h2>
+
+<br />
+<h4>Unix timestamp: </h4>
+<input type="number" class="form-control w-100" placeholder="Unix timestamp" id="txtUnixTimestamp" /> 
+
+<br />
+<h4>Formatted date/time: </h4>
+<input type="text" class="form-control w-100" placeholder="Formatted date/time" id="txtFormattedTime" />
+
+<br />
+<input type="button" class="button w-25" value="Now" id="btnSetToNow" />
+
+<br />
+<div class="w-100">
+    <table class="w-100" id="tblHorizontalButtons">
+        <tr>
+            <td>
+                <input type="button" class="button" id="#btnMinusDay" value="-" />
+            </td>
+            <td>
+                <h4>Day</h4>
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnPlusDay" value="+" />
+            </td>
+            <td>
+                &nbsp;
+                &nbsp;
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnMinusHour" value="-" />
+            </td>
+            <td>
+                <h4>Hr</h4>
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnPlusHour" value="+" />
+            </td>
+            <td>
+                &nbsp;
+                &nbsp;
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnMinusMinute" value="-" />
+            </td>
+            <td>
+                <h4>Min</h4>
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnPlusMinute" value="+" />
+            </td>
+            <td>
+                &nbsp;
+                &nbsp;
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnMinusSecond" value="-" />
+            </td>
+            <td>
+                <h4>Sec</h4>
+            </td>
+            <td>
+                <input type="button" class="button" id="#btnPlusSecond" value="+" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    const UNIX_TIMESTAMP_PLACEHOLDER = "Unix timestamp";
+    const PARSING_ERROR_MESSAGE = "Parsing error";
+
+    const UNIX_TIMESTAMP_FIELD = "#txtUnixTimestamp";
+    const FORMATTED_DATE_FIELD = "#txtFormattedTime";
+
+    function secondsSinceJan1970(date) {
+        if (isNaN(date)) {
+            date = Date.now();
+        }
+
+        return Math.floor(date / 1000)
+    }
+
+    function formattedDateChanged() {
+        var date = Date.parse($(FORMATTED_DATE_FIELD).val());
+        if (!isNaN(date)) {
+            $(UNIX_TIMESTAMP_FIELD).val(secondsSinceJan1970(date));
+            $(UNIX_TIMESTAMP_FIELD).attr("placeholder", UNIX_TIMESTAMP_PLACEHOLDER);
+        } else {
+            $(UNIX_TIMESTAMP_FIELD).val("");
+            $(UNIX_TIMESTAMP_FIELD).attr("placeholder", PARSING_ERROR_MESSAGE);
+        }
+    }
+
+    function unixTimestampChanged() {
+        var timestamp = parseInt($(UNIX_TIMESTAMP_FIELD).val());
+        var dateString = new Date(timestamp * 1000);
+        $(FORMATTED_DATE_FIELD).val(dateString);
+    }
+
+    $(document).ready(function() {
+        var seconds = secondsSinceJan1970();
+        var formattedDate = new Date(seconds * 1000);
+
+        $(UNIX_TIMESTAMP_FIELD).val(seconds);
+        $(FORMATTED_DATE_FIELD).val(formattedDate);
+
+        $(FORMATTED_DATE_FIELD).keyup(function() {
+            formattedDateChanged();
+        });
+
+        $(FORMATTED_DATE_FIELD).change(function() {
+            formattedDateChanged();
+        });
+
+        $(UNIX_TIMESTAMP_FIELD).change(function() {
+            unixTimestampChanged();
+        });
+
+        $(UNIX_TIMESTAMP_FIELD).keyup(function() {
+            unixTimestampChanged();
+        });
+    });
+</script>
