@@ -13,6 +13,15 @@ layout: default
         text-align: center;
         width: 2em;
     }
+
+    #btnSetToNow {
+        width: 5em;
+    }
+
+    .centerElement {
+        margin: 0 auto;
+        text-align: center;
+    }
 </style>
 
 <br />
@@ -27,7 +36,9 @@ layout: default
 <input type="text" class="form-control w-100" placeholder="Formatted date/time" id="txtFormattedTime" />
 
 <br />
-<input type="button" class="button w-25" value="Now" id="btnSetToNow" />
+<div class="w-100 text-center">
+    <input type="button" class="button" value="Now" id="btnSetToNow"/>
+</div>
 
 <br />
 <div class="w-100">
@@ -91,6 +102,7 @@ layout: default
 
     const UNIX_TIMESTAMP_FIELD = "#txtUnixTimestamp";
     const FORMATTED_DATE_FIELD = "#txtFormattedTime";
+    const SET_NOW_BUTTON = "#btnSetToNow";
 
     function secondsSinceJan1970(date) {
         if (isNaN(date)) {
@@ -117,12 +129,16 @@ layout: default
         $(FORMATTED_DATE_FIELD).val(dateString);
     }
 
-    $(document).ready(function() {
+    function updateBothElements() {
         var seconds = secondsSinceJan1970();
         var formattedDate = new Date(seconds * 1000);
 
         $(UNIX_TIMESTAMP_FIELD).val(seconds);
         $(FORMATTED_DATE_FIELD).val(formattedDate);
+    }
+
+    $(document).ready(function() {
+        updateBothElements();
 
         $(FORMATTED_DATE_FIELD).keyup(function() {
             formattedDateChanged();
@@ -138,6 +154,10 @@ layout: default
 
         $(UNIX_TIMESTAMP_FIELD).keyup(function() {
             unixTimestampChanged();
+        });
+
+        $(SET_NOW_BUTTON).click(function() {
+            updateBothElements();
         });
     });
 </script>
