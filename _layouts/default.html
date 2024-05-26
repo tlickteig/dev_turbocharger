@@ -1,176 +1,195 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-    <style>
-      @font-face {
-          font-family: Nunito-Black;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Black.ttf);
-      }
-      
-      @font-face {
-          font-family: Nunito-Light;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Light.ttf);
-      }
 
-      @font-face {
-          font-family: Nunito-Regular;
-          src: url({{ site.baseurl }}/font/nunito/Nunito-Regular.ttf);
-      }
+<head lang="en">
+  <style>
+    @font-face {
+      font-family: Nunito-Black;
+      src: url({{ site.baseurl }}/font/nunito/Nunito-Black.ttf);
+    }
 
-      @font-face {
-        font-family: Fa-Regular;
-        src: url({{ site.baseurl }}/font/fontawesome/fa_regular_400.ttf);
-      }
+    @font-face {
+      font-family: Nunito-Light;
+      src: url({{ site.baseurl }}/font/nunito/Nunito-Light.ttf);
+    }
 
-      @font-face {
-        font-family: Fa-Brands;
-        src: url({{ site.baseurl }}/font/fontawesome/fa_brands_400.ttf);
-      }
+    @font-face {
+      font-family: Nunito-Regular;
+      src: url({{ site.baseurl }}/font/nunito/Nunito-Regular.ttf);
+    }
 
-      * {
-        font-family: Nunito-Regular;
-      }
+    @font-face {
+      font-family: Fa-Regular;
+      src: url({{ site.baseurl }}/font/fontawesome/fa_regular_400.ttf);
+    }
 
-      .vertical-center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-      }
+    @font-face {
+      font-family: Fa-Brands;
+      src: url({{ site.baseurl }}/font/fontawesome/fa_brands_400.ttf);
+    }
 
-      #dvContainer {
-        margin: auto;
-        width: 50%;
-        padding: 10px;
-      }
-    </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-    <title>{{ page.title }}</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <meta name="description" content="{{ page.description }}">
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid col-lg-10">
-          <a class="navbar-brand" href="{{ site.baseurl }}/">Dev Turbocharger</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span style="font-family: Fa-Regular">&#xf7d9;</span>
-                  Tools
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/storage_size_converter">Storage size converter</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/url_encode_or_decode">URL Encoder/Decoder</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/base64_encode_decode">Base64 Encoder/Decoder</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/binary_hex_converter">Binary/Hex converter</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/md5_or_sha_hasher">MD5/SHA hasher</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/color_picker">Color picker</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/user_agent_parser">User Agent Parser</a></li>
-                  <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/secure_password_generator">Secure Password Generator</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
-                  <span style="font-family: Fa-Brands">&#xf09b;</span>
-                  GitHub
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://github.com/{{ site.github_username }}{{ site.baseurl }}/blob/main/README.md">
-                  <span style="font-family: Fa-Regular">&#xf05a;</span>
-                  About
-                </a>
-              </li>
-              <li class="nav-item dropdown" id="liThemeMenu">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span id="spnThemeIcon" style="font-family: Fa-Regular">&#xe4e5;</span>
-                  <span id="spnThemeLabel">System theme</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item">System theme</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item">Light</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item">Dark</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+    * {
+      font-family: Nunito-Regular;
+    }
+
+    .vertical-center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+    .btn-primary {
+      background-color: #6c757d !important;
+      border: 0px !important;
+    }
+
+    #dvContainer {
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <title>{{ page.title }}</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta name="description" content="{{ page.description }}">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid col-lg-10">
+        <a class="navbar-brand" href="{{ site.baseurl }}/">Dev Turbocharger</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span style="font-family: Fa-Regular">&#xf7d9;</span>
+                Tools
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/storage_size_converter">Storage size
+                    converter</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/url_encode_or_decode">URL
+                    Encoder/Decoder</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/base64_encode_decode">Base64
+                    Encoder/Decoder</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/binary_hex_converter">Binary/Hex
+                    converter</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/md5_or_sha_hasher">MD5/SHA hasher</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/color_picker">Color picker</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/user_agent_parser">User Agent Parser</a>
+                </li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/secure_password_generator">Secure Password
+                    Generator</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"
+                href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
+                <span style="font-family: Fa-Brands">&#xf09b;</span>
+                GitHub
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"
+                href="https://github.com/{{ site.github_username }}{{ site.baseurl }}/blob/main/README.md">
+                <span style="font-family: Fa-Regular">&#xf05a;</span>
+                About
+              </a>
+            </li>
+            <li class="nav-item dropdown" id="liThemeMenu">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span id="spnThemeIcon" style="font-family: Fa-Regular">&#xe4e5;</span>
+                <span id="spnThemeLabel">System theme</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item">System theme</a>
+                </li>
+                <li>
+                  <a class="dropdown-item">Light</a>
+                </li>
+                <li>
+                  <a class="dropdown-item">Dark</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </header>
-    <div id="dvContainer">
-      {{ content }}
-    </div>
-    <script>
-      var html = document.querySelector("html");
-      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-      var selectedTheme = localStorage.getItem("selectedTheme");
-      if (selectedTheme == null) {
-        selectedTheme = "System theme"
+      </div>
+    </nav>
+  </header>
+  <div id="dvContainer">
+    {{ content }}
+  </div>
+  <script>
+    var html = document.querySelector("html");
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    var selectedTheme = localStorage.getItem("selectedTheme");
+    if (selectedTheme == null) {
+      selectedTheme = "System theme"
+    }
+
+    if (selectedTheme == "Light") {
+      html.setAttribute("data-bs-theme", "light");
+    } else if (selectedTheme == "Dark") {
+      html.setAttribute("data-bs-theme", "dark");
+    } else {
+      if (darkThemeMq.matches) {
+        html.setAttribute("data-bs-theme", "dark");
+      }
+      else {
+        html.setAttribute("data-bs-theme", "light");
+      }
+    }
+
+    $(document).ready(function () {
+      $("#spnThemeLabel").text(selectedTheme);
+      if (selectedTheme == "Light") {
+        $("#spnThemeIcon").text("\uf185");
+      } else if (selectedTheme == "Dark") {
+        $("#spnThemeIcon").text("\uf186");
+      } else {
+        $("#spnThemeIcon").text("\ue4e5");
       }
 
-      if (selectedTheme == "Light") {
-        html.setAttribute("data-bs-theme", "light");
-      }  else if (selectedTheme == "Dark") {
-        html.setAttribute("data-bs-theme", "dark");
-      } else {
-        if (darkThemeMq.matches) {
-          html.setAttribute("data-bs-theme", "dark");
-        }
-        else {
-          html.setAttribute("data-bs-theme", "light");
-        }
-      } 
-
-      $(document).ready(function() {
+      $("#liThemeMenu .dropdown-item").click(function () {
+        var selectedTheme = $(this).text().trim();
+        localStorage.setItem("selectedTheme", selectedTheme);
         $("#spnThemeLabel").text(selectedTheme);
         if (selectedTheme == "Light") {
           $("#spnThemeIcon").text("\uf185");
-        } else if (selectedTheme == "Dark") {
-          $("#spnThemeIcon").text("\uf186");
-        } else {
-          $("#spnThemeIcon").text("\ue4e5");
+          html.setAttribute("data-bs-theme", "light");
         }
-
-        $("#liThemeMenu .dropdown-item").click(function() {
-          var selectedTheme = $(this).text().trim();
-          localStorage.setItem("selectedTheme", selectedTheme);
-          $("#spnThemeLabel").text(selectedTheme);
-          if (selectedTheme == "Light") {
-            $("#spnThemeIcon").text("\uf185");
-            html.setAttribute("data-bs-theme", "light");
-          }
-          else if (selectedTheme == "Dark") {
-            $("#spnThemeIcon").text("\uf186");
+        else if (selectedTheme == "Dark") {
+          $("#spnThemeIcon").text("\uf186");
+          html.setAttribute("data-bs-theme", "dark");
+        }
+        else {
+          $("#spnThemeIcon").text("\ue4e5");
+          if (darkThemeMq.matches) {
             html.setAttribute("data-bs-theme", "dark");
           }
           else {
-            $("#spnThemeIcon").text("\ue4e5");
-            if (darkThemeMq.matches) {
-              html.setAttribute("data-bs-theme", "dark");
-            }
-            else {
-              html.setAttribute("data-bs-theme", "light");
-            }
+            html.setAttribute("data-bs-theme", "light");
           }
-        });
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
