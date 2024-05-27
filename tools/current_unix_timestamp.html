@@ -1,0 +1,55 @@
+---
+title: Unix time converter
+description: Convert back and forth between Unix timestamps and formatted dates
+layout: default
+---
+
+<style>
+    #h1CurrentUnixTimestamp {
+      font-family: SevenSegment;
+      font-size: 7vw;
+    }
+</style>
+
+<br />
+<div class="w-100 text-center">
+    <h2>Current Unix Timestamp:</h2>
+</div>
+
+<br />
+<div class="w-100 text-center">
+    <h1 id="h1CurrentUnixTimestamp">0</h1>
+</div>
+
+<br />
+<div class="w-100 text-center">
+    <h2>Current UTC time:</h2>
+</div>
+
+<div class="w-100 text-center">
+    <h4 id="h1CurrentUTCTime">0</h4>
+</div>
+
+<br />
+<div class="w-100 text-center">
+    <h2>Current local time:</h2>
+</div>
+
+<div class="w-100 text-center">
+    <h4 id="h1CurrentLocalTime">0</h4>
+</div>
+
+<script>
+    $(document).ready(function() {
+        setInterval(function() {
+            var timestamp = Math.floor(Date.now() / 1000);
+            $("#h1CurrentUnixTimestamp").text(timestamp);
+
+            var utcTime = new Date(timestamp * 1000).toUTCString();
+            var yourTime = new Date(timestamp * 1000);
+
+            $("#h1CurrentUTCTime").text(utcTime);
+            $("#h1CurrentLocalTime").text(yourTime);
+        }, 200);
+    });
+</script>

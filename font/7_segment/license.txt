@@ -1,0 +1,2 @@
+This 7 segment font can be located here: https://torinak.com/font/7-segment
+This font is licensed under the Open Font License: https://openfontlicense.org/
