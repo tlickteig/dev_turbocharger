@@ -19,6 +19,26 @@ layout: default
     #btnSetToNow {
         width: 5em;
     }
+
+    @media screen and (min-width: 1070px) {
+        #tblHorizontalButtons {
+            visibility: visible;
+        }
+
+        #tblVerticalButtons {
+            visibility: hidden;
+        }
+    }
+
+    @media screen and (max-width: 1071px) {
+        #tblHorizontalButtons {
+            visibility: hidden;
+        }
+
+        #tblVerticalButtons {
+            visibility: visible;
+        }
+    }
 </style>
 
 <br />
@@ -48,52 +68,113 @@ layout: default
     <table class="w-100" id="tblHorizontalButtons">
         <tr>
             <td>
-                <input type="button" class="btn btn-primary" id="btnMinusDay" value="-" />
+                <input type="button" class="btn btn-primary btnMinusDay" value="-" />
             </td>
             <td>
                 <h4>Day</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnPlusDay" value="+" />
+                <input type="button" class="btn btn-primary btnPlusDay" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnMinusHour" value="-" />
+                <input type="button" class="btn btn-primary btnMinusHour" value="-" />
             </td>
             <td>
                 <h4>Hr</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnPlusHour" value="+" />
+                <input type="button" class="btn btn-primary btnPlusHour" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnMinusMinute" value="-" />
+                <input type="button" class="btn btn-primary btnMinusMinute" value="-" />
             </td>
             <td>
                 <h4>Min</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnPlusMinute" value="+" />
+                <input type="button" class="btn btn-primary btnPlusMinute" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnMinusSecond" value="-" />
+                <input type="button" class="btn btn-primary btnMinusSecond" value="-" />
             </td>
             <td>
                 <h4>Sec</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="btnPlusSecond" value="+" />
+                <input type="button" class="btn btn-primary btnPlusSecond" value="+" />
+            </td>
+        </tr>
+    </table>
+    <table class="w-100" id="tblVerticalButtons">
+        <tr class="w-100 text-center">
+            <td>
+                <input type="button" class="btn btn-primary btnMinusDay" value="-" />
+            </td>
+            <td>
+                <h4>Day</h4>
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary btnPlusDay" value="+" />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <input type="button" class="btn btn-primary btnMinusHour" value="-" />
+            </td>
+            <td>
+                <h4>Hr</h4>
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary btnPlusHour" value="+" />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <input type="button" class="btn btn-primary btnMinusMinute" value="-" />
+            </td>
+            <td>
+                <h4>Min</h4>
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary btnPlusMinute" value="+" />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr class="w-100 text-center">
+            <td>
+                <input type="button" class="btn btn-primary btnMinusSecond" value="-" />
+            </td>
+            <td>
+                <h4>Sec</h4>
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary btnPlusSecond" value="+" />
             </td>
         </tr>
     </table>
@@ -108,14 +189,14 @@ layout: default
     const SET_NOW_BUTTON = "#btnSetToNow";
     const UTC_CHECKBOX = "#chkUseUTC";
 
-    const BTN_MINUS_SECOND = "#btnMinusSecond";
-    const BTN_PLUS_SECOND = "#btnPlusSecond";
-    const BTN_MINUS_MINUTE = "#btnMinusMinute";
-    const BTN_PLUS_MINUTE = "#btnPlusMinute";
-    const BTN_MINUS_HOUR = "#btnMinusHour";
-    const BTN_PLUS_HOUR = "#btnPlusHour";
-    const BTN_MINUS_DAY = "#btnMinusDay";
-    const BTN_PLUS_DAY = "#btnPlusDay";
+    const BTN_MINUS_SECOND = ".btnMinusSecond";
+    const BTN_PLUS_SECOND = ".btnPlusSecond";
+    const BTN_MINUS_MINUTE = ".btnMinusMinute";
+    const BTN_PLUS_MINUTE = ".btnPlusMinute";
+    const BTN_MINUS_HOUR = ".btnMinusHour";
+    const BTN_PLUS_HOUR = ".btnPlusHour";
+    const BTN_MINUS_DAY = ".btnMinusDay";
+    const BTN_PLUS_DAY = ".btnPlusDay";
 
     function secondsSinceJan1970(date) {
         if (isNaN(date)) {
