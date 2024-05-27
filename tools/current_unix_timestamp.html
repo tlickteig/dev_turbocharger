@@ -21,6 +21,10 @@ layout: default
     <h1 id="h1CurrentUnixTimestamp">0</h1>
 </div>
 
+<div class="w-100 text-center d-grid gap-2 d-md-block">
+    <input type="button" class="btn btn-secondary" value="Copy to Clipboard" id="btnCopyUnixToClipboard"/>
+</div>
+
 <br />
 <div class="w-100 text-center">
     <h2>Current UTC time:</h2>
@@ -51,5 +55,9 @@ layout: default
             $("#h1CurrentUTCTime").text(utcTime);
             $("#h1CurrentLocalTime").text(yourTime);
         }, 200);
+
+        $("#btnCopyUnixToClipboard").click(function() {
+            navigator.clipboard.writeText($("#h1CurrentUnixTimestamp").text());
+        });
     });
 </script>
