@@ -4,6 +4,8 @@ description: Convert back and forth between Unix timestamps and formatted dates
 layout: default
 ---
 
+<link href="{{ site.baseurl }}/css/switch.css" rel="stylesheet">
+
 <style>
     #tblHorizontalButtons td {
         text-align: center;
@@ -27,7 +29,13 @@ layout: default
 <input type="number" class="form-control w-100" placeholder="Unix timestamp" id="txtUnixTimestamp" /> 
 
 <br />
+<hr class="mt-2 mb-3"/>
+
 <h4>Formatted date/time: </h4>
+<div class="form-check">
+    <label class="form-check-label" for="chkUseUTC">UTC</label>
+    <input class="form-check-input" type="checkbox" value="" id="chkUseUTC">
+</div>
 <input type="text" class="form-control w-100" placeholder="Formatted date/time" id="txtFormattedTime" />
 
 <br />
@@ -40,52 +48,52 @@ layout: default
     <table class="w-100" id="tblHorizontalButtons">
         <tr>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnMinusDay" value="-" />
+                <input type="button" class="btn btn-primary" id="btnMinusDay" value="-" />
             </td>
             <td>
                 <h4>Day</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnPlusDay" value="+" />
+                <input type="button" class="btn btn-primary" id="btnPlusDay" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnMinusHour" value="-" />
+                <input type="button" class="btn btn-primary" id="btnMinusHour" value="-" />
             </td>
             <td>
                 <h4>Hr</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnPlusHour" value="+" />
+                <input type="button" class="btn btn-primary" id="btnPlusHour" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnMinusMinute" value="-" />
+                <input type="button" class="btn btn-primary" id="btnMinusMinute" value="-" />
             </td>
             <td>
                 <h4>Min</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnPlusMinute" value="+" />
+                <input type="button" class="btn btn-primary" id="btnPlusMinute" value="+" />
             </td>
             <td>
                 &nbsp;
                 &nbsp;
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnMinusSecond" value="-" />
+                <input type="button" class="btn btn-primary" id="btnMinusSecond" value="-" />
             </td>
             <td>
                 <h4>Sec</h4>
             </td>
             <td>
-                <input type="button" class="btn btn-primary" id="#btnPlusSecond" value="+" />
+                <input type="button" class="btn btn-primary" id="btnPlusSecond" value="+" />
             </td>
         </tr>
     </table>
@@ -98,6 +106,16 @@ layout: default
     const UNIX_TIMESTAMP_FIELD = "#txtUnixTimestamp";
     const FORMATTED_DATE_FIELD = "#txtFormattedTime";
     const SET_NOW_BUTTON = "#btnSetToNow";
+    const UTC_CHECKBOX = "#chkUseUTC";
+
+    const BTN_MINUS_SECOND = "#btnMinusSecond";
+    const BTN_PLUS_SECOND = "#btnPlusSecond";
+    const BTN_MINUS_MINUTE = "#btnMinusMinute";
+    const BTN_PLUS_MINUTE = "#btnPlusMinute";
+    const BTN_MINUS_HOUR = "#btnMinusHour";
+    const BTN_PLUS_HOUR = "#btnPlusHour";
+    const BTN_MINUS_DAY = "#btnMinusDay";
+    const BTN_PLUS_DAY = "#btnPlusDay";
 
     function secondsSinceJan1970(date) {
         if (isNaN(date)) {
@@ -121,19 +139,51 @@ layout: default
     function unixTimestampChanged() {
         var timestamp = parseInt($(UNIX_TIMESTAMP_FIELD).val());
         var dateString = new Date(timestamp * 1000);
+        if (usingUTC()) {
+            dateString = dateString.toUTCString();
+        }
         $(FORMATTED_DATE_FIELD).val(dateString);
     }
 
-    function updateBothElements() {
+    function usingUTC() {
+        return $(UTC_CHECKBOX).is(':checked');
+    }
+
+    function changeUTCMode() {
+        var timestamp = parseInt($(UNIX_TIMESTAMP_FIELD).val());
+        var dateString = new Date(timestamp * 1000);
+        if (usingUTC()) {
+            dateString = dateString.toUTCString();
+        }
+
+        $(FORMATTED_DATE_FIELD).val(dateString);
+    }
+
+    function setToCurrentTime() {
         var seconds = secondsSinceJan1970();
         var formattedDate = new Date(seconds * 1000);
+        if (usingUTC()) {
+            formattedDate = formattedDate.toUTCString();
+        }
 
         $(UNIX_TIMESTAMP_FIELD).val(seconds);
         $(FORMATTED_DATE_FIELD).val(formattedDate);
     }
 
+    function addSeconds(seconds) {
+        var timestamp = parseInt($(UNIX_TIMESTAMP_FIELD).val());
+        var newTimestamp = timestamp + seconds;
+        var formattedDate = new Date(newTimestamp * 1000);
+        if (usingUTC()) {
+            formattedDate = formattedDate.toUTCString();
+        }
+
+        $(UNIX_TIMESTAMP_FIELD).val(newTimestamp);
+        $(FORMATTED_DATE_FIELD).val(formattedDate);
+    }
+    
     $(document).ready(function() {
-        updateBothElements();
+        setToCurrentTime();
 
         $(FORMATTED_DATE_FIELD).keyup(function() {
             formattedDateChanged();
@@ -152,7 +202,43 @@ layout: default
         });
 
         $(SET_NOW_BUTTON).click(function() {
-            updateBothElements();
+            setToCurrentTime();
+        });
+
+        $(UTC_CHECKBOX).click(function() {
+            changeUTCMode();
+        });
+
+        $(BTN_PLUS_SECOND).click(function() {
+            addSeconds(1);
+        });
+
+        $(BTN_MINUS_SECOND).click(function() {
+            addSeconds(-1);
+        });
+
+        $(BTN_PLUS_MINUTE).click(function() {
+            addSeconds(60);
+        });
+
+        $(BTN_MINUS_MINUTE).click(function() {
+            addSeconds(-60);
+        });
+
+        $(BTN_PLUS_HOUR).click(function() {
+            addSeconds(3600);
+        });
+
+        $(BTN_MINUS_HOUR).click(function() {
+            addSeconds(-3600);
+        });
+
+        $(BTN_MINUS_DAY).click(function() {
+            addSeconds(-86400);
+        });
+
+        $(BTN_PLUS_DAY).click(function() {
+            addSeconds(86400);
         });
     });
 </script>
