@@ -1,0 +1,23 @@
+---
+title: Time zone converter
+description: Convert between different time zones with this tool
+layout: default
+---
+
+<br />
+<h2>AES Encryption utility</h2>
+<div class="p-2">
+    {% include time_zone_dropdown_menu.html id="drpInputZone" %}
+</div>
+
+<script>
+    let inputUTCOffset = 0
+
+    $(document).ready(function() {
+        $("#drpInputZone .dropdown-item").click(function() {
+            var selectedValue = this.innerHTML;
+            inputUTCOffset = parseFloat($(this).attr("utc-offset"));
+            $("#drpInputZone .dropdown-toggle").text(selectedValue);
+        });
+    });
+</script>
