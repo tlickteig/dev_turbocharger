@@ -18,7 +18,7 @@ layout: default
 
 <br />
 <div class="w-100 text-center">
-    <h1 id="h1CurrentUnixTimestamp">0</h1>
+    <h1 id="h1CurrentUnixTimestamp"></h1>
 </div>
 
 <div class="w-100 text-center d-grid gap-2 d-md-block">
@@ -31,7 +31,13 @@ layout: default
 </div>
 
 <div class="w-100 text-center">
-    <h4 id="h1CurrentUTCTime">0</h4>
+    <h4 id="h4CurrentUTCTime">
+        <span id="spnCurrentUTCTime"></span>
+        <span>
+            <input type="button" style="font-family: Fa-Regular" class="btn btn-secondary" 
+                value="&#xf0c5;" id="btnCopyUTCTimeToClipboard" />
+        </span>
+    </h4>
 </div>
 
 <br />
@@ -40,7 +46,13 @@ layout: default
 </div>
 
 <div class="w-100 text-center">
-    <h4 id="h1CurrentLocalTime">0</h4>
+    <h4 id="h4CurrentLocalTime">
+        <span id="spnCurrentLocalTime"></span>
+        <span>
+            <input type="button" style="font-family: Fa-Regular" class="btn btn-secondary" 
+                value="&#xf0c5;" id="btnCopyCurrentTimeToClipboard" />
+        </span>
+    </h4>
 </div>
 
 <script>
@@ -52,12 +64,20 @@ layout: default
             var utcTime = new Date(timestamp * 1000).toUTCString();
             var yourTime = new Date(timestamp * 1000);
 
-            $("#h1CurrentUTCTime").text(utcTime);
-            $("#h1CurrentLocalTime").text(yourTime);
+            $("#spnCurrentUTCTime").text(utcTime);
+            $("#spnCurrentLocalTime").text(yourTime);
         }, 200);
 
         $("#btnCopyUnixToClipboard").click(function() {
             navigator.clipboard.writeText($("#h1CurrentUnixTimestamp").text());
+        });
+
+        $("#btnCopyCurrentTimeToClipboard").click(function() {
+            navigator.clipboard.writeText($("#spnCurrentLocalTime").text());
+        });
+
+        $("#btnCopyUTCTimeToClipboard").click(function() {
+            navigator.clipboard.writeText($("#spnCurrentUTCTime").text());
         });
     });
 </script>
