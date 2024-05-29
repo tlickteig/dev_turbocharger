@@ -4,10 +4,21 @@ description: Convert between different time zones with this tool
 layout: default
 ---
 
+<style>
+    #h1InputTime {
+        font-family: SevenSegment;
+        font-size: 6vw;
+    }
+</style>
+
 <br />
 <h2>AES Encryption utility</h2>
 <div class="p-2">
     {% include time_zone_dropdown_menu.html id="drpInputZone" %}
+</div>
+
+<div class="w-100 text-center">
+    <h1 id="h1InputTime">12:00 PM 5/28/2024</h1>
 </div>
 
 <script>
