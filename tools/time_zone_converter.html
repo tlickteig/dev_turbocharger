@@ -5,30 +5,59 @@ layout: default
 ---
 
 <style>
-    #h1InputTime {
-        font-size: 6vw;
+    #spnInputTime, #spnInputDate {
+        font-family: DigitalSeven;
     }
 
-    #spnInputTime, #spnInputDate {
+    #txtTimeInput, #txtDateInput {
+        /*font-size: 4vw;*/
+        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid #495057
+    }
+
+    #h2CurrentLocalTime {
+        font-size: 5vw;
         font-family: DigitalSeven;
     }
 </style>
 
 <br />
-<h2>AES Encryption utility</h2>
-<div class="p-2">
+<h2>Time zone converter</h2>
+
+<br />
+<div>
     {% include time_zone_dropdown_menu.html id="drpInputZone" %}
 </div>
 
-<div class="w-100 text-center">
+<br />
+<div class="w-100">
     <h1 id="h1InputDateTime">
         <span id="spnInputTime">
-            <input type="time" value="00:00"/>
+            <input type="time" value="" id="txtTimeInput" />
+        </span>
+        <span>
+
         </span>
         <span id="spnInputDate">
-            <input type="date" value=""/>
+            <input type="date" value="" id="txtDateInput"/>
         </span>
     </h1>
+</div>
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<div>
+    {% include time_zone_dropdown_menu.html id="drpInputZone" %}
+</div>
+
+<br />
+<div class="w-100">
+    <h4 id="h2CurrentLocalTime">
+        --
+    </h4>
 </div>
 
 <script>
