@@ -4,12 +4,13 @@ description: Convert between different time zones with this tool
 layout: default
 ---
 
-<!-- https://www.dafont.com/digital-7.font -->
-
 <style>
     #h1InputTime {
-        font-family: SevenSegment;
         font-size: 6vw;
+    }
+
+    #spnInputTime, #spnInputDate {
+        font-family: DigitalSeven;
     }
 </style>
 
@@ -20,7 +21,14 @@ layout: default
 </div>
 
 <div class="w-100 text-center">
-    <h1 id="h1InputTime">12:00 PM 5/28/2024</h1>
+    <h1 id="h1InputDateTime">
+        <span id="spnInputTime">
+            <input type="time" value="00:00"/>
+        </span>
+        <span id="spnInputDate">
+            <input type="date" value=""/>
+        </span>
+    </h1>
 </div>
 
 <script>
