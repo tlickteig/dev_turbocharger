@@ -50,7 +50,7 @@ layout: default
 <br />
 
 <div>
-    {% include time_zone_dropdown_menu.html id="drpInputZone" %}
+    {% include time_zone_dropdown_menu.html id="drpOutputZone" %}
 </div>
 
 <br />
@@ -61,13 +61,35 @@ layout: default
 </div>
 
 <script>
-    let inputUTCOffset = 0
+    let inputUTCOffset = 0;
+    let outputUTCOffset = 0;
+
+    function do_convert() {
+        try {
+            var dateString = $("#txtDateInput").val();
+            var timeString = $("#txtDateInput").val();
+            var plus = "";
+
+            var dateTimeString = `${dateString}T${timeString}:00.000+5:00`;
+
+            var date = new Date()
+        } catch {
+
+        }
+    }
 
     $(document).ready(function() {
+
         $("#drpInputZone .dropdown-item").click(function() {
             var selectedValue = this.innerHTML;
             inputUTCOffset = parseFloat($(this).attr("utc-offset"));
-            $("#drpInputZone .dropdown-toggle").text(selectedValue);
+            $("#drpInputZone .dropdown-toggle").text( );
+        });
+
+        $("#drpOutputZone .dropdown-item").click(function() {
+            var selectedValue = this.innerHTML;
+            outputUTCOffset = parseFloat($(this).attr("utc-offset"));
+            $("#drpOutputZone .dropdown-toggle").text(selectedValue);
         });
     });
 </script>
