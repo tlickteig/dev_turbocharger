@@ -67,12 +67,27 @@ layout: default
     function do_convert() {
         try {
             var dateString = $("#txtDateInput").val();
-            var timeString = $("#txtDateInput").val();
-            var plus = "";
+            var timeString = $("#txtTimeInput").val();
+            var plusMinus = inputUTCOffset >= 0 ? "+" : "-";
+            var timeZoneHour = (Math.abs(Math.floor(inputUTCOffset))).toString();
 
-            var dateTimeString = `${dateString}T${timeString}:00.000+5:00`;
+            if (timeZoneHour.length == 1) {
+                timeZoneHour = "0" + timeZoneHour;
+            }
 
-            var date = new Date()
+            var timeZoneMinutes = "00";
+            if (!Number.isInteger(inputUTCOffset)) {
+                var timeZoneFraction = (inputUTCOffset + "").split(".")[1];
+                timeZoneMinutes = (timeZoneFraction * (2.0 / 3.0)).toString();
+            }
+
+            if (timeZoneMinutes.length == 1) {
+                timeZoneMinutes = "0" + timeZoneMinutes;
+            }
+
+            var dateTimeString = `${dateString}T${timeString}:00.000${plusMinus}${timeZoneHour}:${timeZoneMinutes}`;
+            var date = new Date(dateTimeString);
+
         } catch {
 
         }
@@ -83,13 +98,15 @@ layout: default
         $("#drpInputZone .dropdown-item").click(function() {
             var selectedValue = this.innerHTML;
             inputUTCOffset = parseFloat($(this).attr("utc-offset"));
-            $("#drpInputZone .dropdown-toggle").text( );
+            $("#drpInputZone .dropdown-toggle").text(selectedValue);
+            do_convert();
         });
 
         $("#drpOutputZone .dropdown-item").click(function() {
             var selectedValue = this.innerHTML;
             outputUTCOffset = parseFloat($(this).attr("utc-offset"));
             $("#drpOutputZone .dropdown-toggle").text(selectedValue);
+            do_convert();
         });
     });
 </script>
