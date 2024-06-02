@@ -31,6 +31,12 @@ layout: default
 </div>
 
 <br />
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="chkDaylightSavings" />
+    <label class="form-check-label" for="chkDaylightSavings">Daylight savings time</label>
+</div>
+
+<br />
 <div class="w-100">
     <h1 id="h1InputDateTime">
         <span id="spnInputTime">
@@ -66,6 +72,10 @@ layout: default
 
     function do_convert() {
         try {
+            if ($("#chkDaylightSavings").is(':checked')) {
+                inputUTCOffset = inputUTCOffset + 1;
+            }
+
             var dateString = $("#txtDateInput").val();
             var timeString = $("#txtTimeInput").val();
             var plusMinus = inputUTCOffset >= 0 ? "+" : "-";
