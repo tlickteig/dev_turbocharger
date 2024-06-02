@@ -88,16 +88,21 @@ layout: default
             var timeZoneMinutes = "00";
             if (!Number.isInteger(inputUTCOffset)) {
                 var timeZoneFraction = (inputUTCOffset + "").split(".")[1];
-                timeZoneMinutes = (timeZoneFraction * (2.0 / 3.0)).toString();
+                if (timeZoneFraction < 10) {
+                    timeZoneFraction = timeZoneFraction * 10;
+                }
+                timeZoneMinutes = (timeZoneFraction / (5.0 / 3.0)).toString();
             }
 
             if (timeZoneMinutes.length == 1) {
                 timeZoneMinutes = "0" + timeZoneMinutes;
             }
 
-            var dateTimeString = `${dateString}T${timeString}:00.000${plusMinus}${timeZoneHour}:${timeZoneMinutes}`;
-            var date = new Date(dateTimeString);
+            var inputDateTimeString = `${dateString}T${timeString}:00.000${plusMinus}${timeZoneHour}:${timeZoneMinutes}`;
+            var inputDateTime = new Date(inputDateTimeString);
 
+            var utcDateTime = inputDateTime.getTime() + (inputDateTime.getTimezoneOffset() * 60000);
+            var outputDateTime = new Date(utcDateTime + (3600000 * outputUTCOffset));
         } catch {
 
         }
