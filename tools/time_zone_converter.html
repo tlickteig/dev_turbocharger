@@ -32,8 +32,8 @@ layout: default
 
 <br />
 <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="chkDaylightSavings" />
-    <label class="form-check-label" for="chkDaylightSavings">Daylight savings time</label>
+    <input class="form-check-input" type="checkbox" value="" id="chkInputDaylightSavings" />
+    <label class="form-check-label" for="chkInputDaylightSavings">Daylight savings time</label>
 </div>
 
 <br />
@@ -60,6 +60,12 @@ layout: default
 </div>
 
 <br />
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="chkOutputDaylightSavings" />
+    <label class="form-check-label" for="chkOutputDaylightSavings">Daylight savings time</label>
+</div>
+
+<br />
 <div class="w-100">
     <h4 id="h2CurrentLocalTime">
         --
@@ -70,12 +76,12 @@ layout: default
     let inputUTCOffset = 0;
     let outputUTCOffset = 0;
 
+    function set_offset() {
+        var baseOffset = 
+    }
+
     function do_convert() {
         try {
-            if ($("#chkDaylightSavings").is(':checked')) {
-                inputUTCOffset = inputUTCOffset + 1;
-            }
-
             var dateString = $("#txtDateInput").val();
             var timeString = $("#txtTimeInput").val();
             var plusMinus = inputUTCOffset >= 0 ? "+" : "-";
@@ -100,9 +106,15 @@ layout: default
 
             var inputDateTimeString = `${dateString}T${timeString}:00.000${plusMinus}${timeZoneHour}:${timeZoneMinutes}`;
             var inputDateTime = new Date(inputDateTimeString);
+            var inputTimestamp = inputDateTime.getTime();
 
-            var utcDateTime = inputDateTime.getTime() + (inputDateTime.getTimezoneOffset() * 60000);
-            var outputDateTime = new Date(utcDateTime + (3600000 * outputUTCOffset));
+            var hoursDifference = outputUTCOffset - inputUTCOffset;
+            var msDifference = hoursDifference * 3600 * 1000
+            var outputTimeStamp = inputTimestamp + msDifference;
+
+            var outputDateTime = new Date(outputTimeStamp);
+            var outputDateTimeString = outputDateTime.toLocaleString();
+            $("#h2CurrentLocalTime").text(outputDateTimeString);
         } catch {
 
         }
@@ -121,6 +133,16 @@ layout: default
             var selectedValue = this.innerHTML;
             outputUTCOffset = parseFloat($(this).attr("utc-offset"));
             $("#drpOutputZone .dropdown-toggle").text(selectedValue);
+            do_convert();
+        });
+
+        $("#chkInputDaylightSavings").click(function() {
+            set_offset();
+            do_convert();
+        });
+
+        $("#chkOutputDaylightSavings").click(function() {
+            set_offset();
             do_convert();
         });
     });
