@@ -17,6 +17,9 @@
 6. A color picker
 7. User Agent parser
 8. Secure password generator
+9. Time zone converter
+10. Unix time converter
+11. Current Unix timestamp
 
 ### Tools I plan to add in the future:
 
