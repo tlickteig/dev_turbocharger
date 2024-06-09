@@ -75,9 +75,27 @@ layout: default
 <script>
     let inputUTCOffset = 0;
     let outputUTCOffset = 0;
+    let outputTzId = "Etc/Greenwich";
+
+    function addHoursToDate(date, hours) {
+        return new Date(new Date(date).setHours(date.getHours() + hours));
+    }
 
     function set_offset() {
-        var baseOffset = 
+        var baseInputOffset = parseInt($("#drpInputZone").attr("utc-offset"));
+        var baseOutputOffset = parseInt($("#drpOutputZone").attr("utc-offset"));
+
+        if ($("#chkInputDaylightSavings").is(':checked')) {
+            baseInputOffset = baseInputOffset + 1;
+        }
+
+        if ($("#chkOutputDaylightSavings").is(':checked')) {
+            baseOutputOffset = baseOutputOffset + 1;
+        }
+
+        inputUTCOffset = baseInputOffset;
+        outputUTCOffset = baseOutputOffset;
+        outputTzId = $("#drpOutputZone").attr("tz-id");
     }
 
     function do_convert() {
@@ -106,16 +124,23 @@ layout: default
 
             var inputDateTimeString = `${dateString}T${timeString}:00.000${plusMinus}${timeZoneHour}:${timeZoneMinutes}`;
             var inputDateTime = new Date(inputDateTimeString);
-            var inputTimestamp = inputDateTime.getTime();
+            if ($("#chkOutputDaylightSavings").is(':checked')) {
+                inputDateTime = addHoursToDate(inputDateTime, 1);
+            }
 
-            var hoursDifference = outputUTCOffset - inputUTCOffset;
-            var msDifference = hoursDifference * 3600 * 1000
-            var outputTimeStamp = inputTimestamp + msDifference;
-
-            var outputDateTime = new Date(outputTimeStamp);
-            var outputDateTimeString = outputDateTime.toLocaleString();
+            const outputOptions = {
+                timeZone: outputTzId,
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+            };
+            const formatter = new Intl.DateTimeFormat([], outputOptions);
+            const outputDateTimeString = formatter.format(inputDateTime);
             $("#h2CurrentLocalTime").text(outputDateTimeString);
-        } catch {
+        } catch (e) {
             $("#h2CurrentLocalTime").text("Error");
         }
     }
@@ -126,6 +151,9 @@ layout: default
             var selectedValue = this.innerHTML;
             inputUTCOffset = parseFloat($(this).attr("utc-offset"));
             $("#drpInputZone .dropdown-toggle").text(selectedValue);
+            $("#drpInputZone").attr("utc-offset", inputUTCOffset);
+            $("#drpInputZone").attr("tz-id", $(this).attr("tz-id"));
+            set_offset();
             do_convert();
         });
 
@@ -133,6 +161,9 @@ layout: default
             var selectedValue = this.innerHTML;
             outputUTCOffset = parseFloat($(this).attr("utc-offset"));
             $("#drpOutputZone .dropdown-toggle").text(selectedValue);
+            $("#drpOutputZone").attr("utc-offset", outputUTCOffset);
+            $("#drpOutputZone").attr("tz-id", $(this).attr("tz-id"));
+            set_offset();
             do_convert();
         });
 
