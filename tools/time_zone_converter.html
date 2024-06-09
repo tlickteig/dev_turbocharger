@@ -10,7 +10,6 @@ layout: default
     }
 
     #txtTimeInput, #txtDateInput {
-        /*font-size: 4vw;*/
         border-radius: 5px;
         background-color: transparent;
         border: 1px solid #495057
@@ -146,7 +145,6 @@ layout: default
     }
 
     $(document).ready(function() {
-
         $("#drpInputZone .dropdown-item").click(function() {
             var selectedValue = this.innerHTML;
             inputUTCOffset = parseFloat($(this).attr("utc-offset"));
@@ -173,6 +171,16 @@ layout: default
         });
 
         $("#chkOutputDaylightSavings").click(function() {
+            set_offset();
+            do_convert();
+        });
+
+        $("#txtTimeInput").keyup(function() {
+            set_offset();
+            do_convert();
+        });
+
+        $("#txtDateInput").keyup(function() {
             set_offset();
             do_convert();
         });
