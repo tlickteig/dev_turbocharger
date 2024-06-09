@@ -5,14 +5,11 @@ layout: default
 ---
 
 <style>
-    #spnInputTime, #spnInputDate {
-        font-family: DigitalSeven;
-    }
-
     #txtTimeInput, #txtDateInput {
         border-radius: 5px;
         background-color: transparent;
-        border: 1px solid #495057
+        border: 1px solid #495057;
+        font-size: var(--bs-btn-font-size);
     }
 
     #h2CurrentLocalTime {
@@ -39,13 +36,11 @@ layout: default
 <div class="w-100">
     <h1 id="h1InputDateTime">
         <span id="spnInputTime">
-            <input type="time" value="" id="txtTimeInput" />
+            <input type="time" value="" id="txtTimeInput" class="form-control" />
         </span>
-        <span>
-
-        </span>
+        <p></p>
         <span id="spnInputDate">
-            <input type="date" value="" id="txtDateInput"/>
+            <input type="date" value="" id="txtDateInput" class="form-control" />
         </span>
     </h1>
 </div>
