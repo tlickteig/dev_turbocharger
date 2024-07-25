@@ -5,13 +5,19 @@ layout: default
 ---
 
 <style>
-    xmp {
-
-    }
     .copyMe:hover {
         cursor: pointer;
     }
 </style>
+
+<script>
+    $(document).ready(function() {
+        $(".copyMe").click(function() {
+            var data = $(this).text();
+            navigator.clipboard.writeText(data);
+        });
+    });
+</script>
 
 <br />
 <h2>Binary/Hexadecimal converter</h2>
@@ -230,91 +236,91 @@ layout: default
         <tr>
             <td class="copyMe">33</td>
             <td class="copyMe">!</td>
-            <td></td>
+            <td class="copyMe">&amp;excl;</td>
             <td>exclamation</td>
         </tr>
         <tr>
             <td class="copyMe">34</td>
             <td class="copyMe">"</td>
-            <td></td>
+            <td class="copyMe">&amp;quot;</td>
             <td>double quote</td>
         </tr>
         <tr>
             <td class="copyMe">35</td>
             <td class="copyMe">#</td>
-            <td></td>
+            <td class="copyMe">&amp;num;</td>
             <td>pound</td>
         </tr>
         <tr>
             <td class="copyMe">36</td>
             <td class="copyMe">$</td>
-            <td></td>
+            <td class="copyMe">&amp;dollar;</td>
             <td>dollar</td>
         </tr>
         <tr>
             <td class="copyMe">37</td>
             <td class="copyMe">%</td>
-            <td></td>
+            <td class="copyMe">&amp;percent;</td>
             <td>percent</td>
         </tr>
         <tr>
             <td class="copyMe">38</td>
             <td class="copyMe">&</td>
-            <td></td>
+            <td class="copyMe">&amp;amp;</td>
             <td>ampersand</td>
         </tr>
         <tr>
             <td class="copyMe">39</td>
             <td class="copyMe">'</td>
-            <td></td>
+            <td class="copyMe">&amp;apos;</td>
             <td>quote</td>
         </tr>
         <tr>
             <td class="copyMe">40</td>
             <td class="copyMe">(</td>
-            <td></td>
+            <td class="copyMe">&amp;lpar;</td>
             <td>left parenthesis</td>
         </tr>
         <tr>
             <td class="copyMe">41</td>
             <td class="copyMe">)</td>
-            <td></td>
+            <td class="copyMe">&amp;rpar;</td>
             <td>right parenthesis</td>
         </tr>
         <tr>
             <td class="copyMe">42</td>
             <td class="copyMe">*</td>
-            <td></td>
+            <td class="copyMe">&amp;ast;</td>
             <td>asterisk</td>
         </tr>
         <tr>
             <td class="copyMe">43</td>
             <td class="copyMe">+</td>
-            <td></td>
+            <td class="copyMe">&amp;plus;</td>
             <td>plus</td>
         </tr>
         <tr>
             <td class="copyMe">44</td>
             <td class="copyMe">,</td>
-            <td></td>
+            <td class="copyMe">&amp;comma;</td>
             <td>comma</td>
         </tr>
         <tr>
             <td class="copyMe">45</td>
             <td class="copyMe">-</td>
-            <td></td>
+            <td class="copyMe">&amp;minus;</td>
             <td>minus</td>
         </tr>
         <tr>
             <td class="copyMe">46</td>
             <td class="copyMe">.</td>
-            <td></td>
+            <td class="copyMe">&amp;period;</td>
             <td>decimal/period</td>
         </tr>
         <tr>
             <td class="copyMe">47</td>
             <td class="copyMe">/</td>
-            <td></td>
+            <td class="copyMe">&amp;sol;</td>
             <td>forward slash</td>
         </tr>
         <tr>
@@ -380,43 +386,43 @@ layout: default
         <tr>
             <td class="copyMe">58</td>
             <td class="copyMe">:</td>
-            <td></td>
+            <td class="copyMe">&amp;colon;</td>
             <td>colon</td>
         </tr>
         <tr>
             <td class="copyMe">59</td>
             <td class="copyMe">;</td>
-            <td></td>
+            <td class="copyMe">&amp;semi;</td>
             <td>semicolon</td>
         </tr>
         <tr>
             <td class="copyMe">60</td>
             <td class="copyMe"><</td>
-            <td></td>
+            <td class="copyMe">&amp;lt;</td>
             <td>less than</td>
         </tr>
         <tr>
             <td class="copyMe">61</td>
             <td class="copyMe">=</td>
-            <td></td>
+            <td class="copyMe">&amp;equals;</td>
             <td>equals</td>
         </tr>
         <tr>
             <td class="copyMe">62</td>
             <td class="copyMe">></td>
-            <td></td>
+            <td class="copyMe">&amp;gt;</td>
             <td>greater than</td>
         </tr>
         <tr>
             <td class="copyMe">63</td>
             <td class="copyMe">?</td>
-            <td></td>
+            <td class="copyMe">&amp;quest;</td>
             <td>question mark</td>
         </tr>
         <tr>
             <td class="copyMe">64</td>
             <td class="copyMe">@</td>
-            <td></td>
+            <td class="copyMe">&amp;commat;</td>
             <td>at symbol</td>
         </tr>
         <tr>
@@ -578,37 +584,37 @@ layout: default
         <tr>
             <td class="copyMe">91</td>
             <td class="copyMe">[</td>
-            <td></td>
+            <td class="copyMe">&amp;lbrack;</td>
             <td>left bracket</td>
         </tr>
         <tr>
             <td class="copyMe">92</td>
             <td class="copyMe">\</td>
-            <td></td>
+            <td class="copyMe">&amp;bsol;</td>
             <td>backslash</td>
         </tr>
         <tr>
             <td class="copyMe">93</td>
             <td class="copyMe">]</td>
-            <td></td>
+            <td class="copyMe">&amp;rbrack;</td>
             <td>right bracket</td>
         </tr>
         <tr>
             <td class="copyMe">94</td>
             <td class="copyMe">^</td>
-            <td></td>
+            <td class="copyMe">&amp;Hat;</td>
             <td>caret</td>
         </tr>
         <tr>
             <td class="copyMe">95</td>
             <td class="copyMe">_</td>
-            <td></td>
+            <td class="copyMe">&amp;lowbar;</td>
             <td>underscore</td>
         </tr>
         <tr>
             <td class="copyMe">96</td>
             <td class="copyMe">`</td>
-            <td></td>
+            <td class="copyMe">&amp;grave;</td>
             <td>backtick</td>
         </tr>
         <tr>
@@ -776,26 +782,26 @@ layout: default
         <tr>
             <td class="copyMe">123</td>
             <td class="copyMe">{</td>
-            <td></td>
+            <td class="copyMe">&amp;lbrace;</td>
             <td>left brace</td>
         </tr>
         <tr>
             <td class="copyMe">124</td>
             <td class="copyMe">|</td>
-            <td></td>
+            <td class="copyMe">&amp;vert;</td>
             <td>vertical pipe</td>
         </tr>
         <tr>
             <td class="copyMe">125</td>
             <td class="copyMe">}</td>
-            <td></td>
+            <td class="copyMe">&amp;rbrace;</td>
             <td>right brace</td>
         </tr>
         <tr>
             <td class="copyMe">126</td>
             <td class="copyMe">~</td>
-            <td></td>
-            <td>tilda</td>
+            <td class="copyMe">&amp;tilde;</td>
+            <td>tilde</td>
         </tr>
         <tr>
             <td class="copyMe">127</td>
