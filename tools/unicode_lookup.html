@@ -7,7 +7,12 @@ layout: default
 <style>
     #h4NoResults {
         color: var(--bs-tertiary-color);
-        visibility: collapse;
+        visibility: hidden;
+        height: 0;
+    }
+
+    #tbResultsTable {
+        visibility: visible;
     }
 </style>
 
@@ -15,15 +20,87 @@ layout: default
 <h2>Unicode character lookup</h2>
 
 <br />
-<h4>Search by character:</h4>
-<input id="charValue" type="text" class="form-control" placeholder="Enter character here" />
-
+<h4>Search:</h4>
+<input id="inputValue" type="text" class="form-control" placeholder="Enter search value here" />
 <br />
+
+<!--<p>Search via the following:</p>
+<ul>
+    <li>Character values</li>
+    <li>Character codes</li>
+    <li>Html codes</li>
+    <li>Decimal values</li>
+    <li>Hexadecimal values</li>
+    <li>Binary values</li>
+</ul>-->
+
+<!--<br />
 <h4>Search by code:</h4>
-<input id="charValue" type="text" class="form-control" placeholder="Enter unicode value here" />
+<input id="codeValue" type="text" class="form-control" placeholder="Enter unicode value here" />-->
 
 <br />
 <hr class="mt-2 mb-3"/>
 <br />
 
 <h4 id="h4NoResults">No results</h4>
+
+<table class="table" id="tbResultsTable">
+    <thead>
+        <tr>
+            <th scope="col">Char</th>
+            <th scope="col">Unicode</th>
+            <th scope="col">Dec</th>
+            <th scope="col">Hex</th>
+            <th scope="col">Html</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<script>
+    
+
+    function doSearch() {
+
+        var outputValues = [];
+        var inputString = $("#inputValue").val();
+
+        outputValues.push(["😂", "U+1f602", "128514", "0x1f602", "&#128514;"])
+        
+        if (outputValues.length > 0) {
+            var outputTables = "";
+            $("#h4NoResults").css("visibility", "hidden");
+            $("#h4NoResults").css("height", "0");
+
+            $("#tbResultsTable").css("visibility", "visible");
+            $("#tbResultsTable").css("height", "auto");
+
+            /*for (outputValue in outputValues) {
+                var row = "<tr>";
+                row = row + "<td>" + outputValue[0] + "</td>";
+                row = row + "</tr>";
+                outputTables = outputTables + row;
+            }*/
+
+            $("#tbResultsTable tbody").html(outputTables);
+        } else {
+            $("#h4NoResults").css("visibility", "visible");
+            $("#h4NoResults").css("height", "auto");
+
+            $("#tbResultsTable").css("visibility", "hidden");
+            $("#tbResultsTable").css("height", "0");
+        }
+    }
+
+    $(document).ready(function() {
+        $("#inputValue").change(function() {
+            doSearch();
+        });
+
+        $("#inputValue").keyup(function() {
+            doSearch();
+        });
+    });
+</script>
