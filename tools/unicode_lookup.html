@@ -5,6 +5,22 @@ layout: default
 ---
 
 <style>
+    .tdCharValue {
+        width: 2em;
+    }
+
+    .tdUnicodeValue {
+        width: 5em;
+    }
+
+    .tdDecValue {
+        width: 5em;
+    }
+
+    .tdHexValue {
+        width: 5em;
+    }
+
     #h4NoResults {
         color: var(--bs-tertiary-color);
         visibility: hidden;
@@ -15,9 +31,9 @@ layout: default
         visibility: visible;
     }
 
-    /*#dvContainer {
-        width: 75% !important;
-    }*/
+    #dvContainer {
+        width: 60% !important;
+    }
 
     /*#tbResultsTable {
         width: 150%;
@@ -162,10 +178,10 @@ layout: default
 
             outputValues.forEach(function(item, index) {
                 var row = "<tr>";
-                row = row + "<td>" + item[0] + "</td>";
-                row = row + "<td>" + item[1] + "</td>";
-                row = row + "<td>" + item[2] + "</td>";
-                row = row + "<td>" + item[3] + "</td>";
+                row = row + "<td class=\"tdCharValue\">" + item[0] + "</td>";
+                row = row + "<td class=\"tdUnicodeValue\">" + item[1] + "</td>";
+                row = row + "<td class=\"tdDecValue\">" + item[2] + "</td>";
+                row = row + "<td class=\"tdHexValue\">" + item[3] + "</td>";
                 //row = row + "<td>" + item[4] + "</td>";
                 row = row + "</tr>";
                 outputTables = outputTables + row;
