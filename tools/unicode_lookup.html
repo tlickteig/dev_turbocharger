@@ -14,6 +14,14 @@ layout: default
     #tbResultsTable {
         visibility: visible;
     }
+
+    /*#dvContainer {
+        width: 75% !important;
+    }*/
+
+    /*#tbResultsTable {
+        width: 150%;
+    }*/
 </style>
 
 <br />
@@ -37,7 +45,7 @@ layout: default
             <th scope="col">Unicode</th>
             <th scope="col">Dec</th>
             <th scope="col">Hex</th>
-            <th scope="col">Html</th>
+            <!--<th scope="col">Html</th>-->
         </tr>
     </thead>
     <tbody>
@@ -46,6 +54,8 @@ layout: default
 </table>
 
 <script>
+    const MAX_UNICODE_VALUE = 1_114_112;
+
     function returnMatchingCharacters(inputString) {
         var outputValues = [];
         if (inputString) {
@@ -59,9 +69,10 @@ layout: default
                 }
                 formattedUnicodeValue = "U+" + formattedUnicodeValue;
 
-                outputValues.push([`&#${rawDecValue};`, 
-                    formattedUnicodeValue, rawDecValue, 
-                    `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+                if (rawDecValue < MAX_UNICODE_VALUE) {
+                    outputValues.push([`&#${rawDecValue};`, formattedUnicodeValue, rawDecValue, 
+                        `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+                }
             }
         }
 
@@ -87,9 +98,11 @@ layout: default
             }
             formattedUnicodeValue = "U+" + formattedUnicodeValue;
 
-            outputValues.push([`&#${rawDecValue};`, 
-                formattedUnicodeValue, rawDecValue, 
-                `0x${inputHex}`, `&amp;#${rawDecValue}; or &amp;#x${inputHex};`]);
+            if (rawDecValue < MAX_UNICODE_VALUE) {
+                outputValues.push([`&#${rawDecValue};`, 
+                    formattedUnicodeValue, rawDecValue, 
+                    `0x${inputHex}`, `&amp;#${rawDecValue}; or &amp;#x${inputHex};`]);
+            }
         }
 
         return outputValues;
@@ -107,9 +120,11 @@ layout: default
             }
             formattedUnicodeValue = "U+" + formattedUnicodeValue;
 
-            outputValues.push([`&#${rawDecValue};`, 
-                formattedUnicodeValue, rawDecValue, 
-                `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+            if (rawDecValue < MAX_UNICODE_VALUE) {
+                outputValues.push([`&#${rawDecValue};`, 
+                    formattedUnicodeValue, rawDecValue, 
+                    `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+            }
         }
 
         return outputValues;
@@ -120,11 +135,23 @@ layout: default
         var outputValues = [];
         var inputString = $("#inputValue").val();
 
-        //var charMatch = returnMatchingCharacters(inputString);
-        //var charMatch = returnMatchingHexValue(inputString);
-        var charMatch = returnMatchingDecValue(inputString);
-        outputValues = outputValues.concat(charMatch);
+        outputValues = outputValues.concat(returnMatchingDecValue(inputString));
+        outputValues = outputValues.concat(returnMatchingHexValue(inputString));
+        outputValues = outputValues.concat(returnMatchingCharacters(inputString));
         
+        // Remove duplicates
+        var tempOutputValues = [];
+        var tempDecValues = []
+        outputValues.forEach(function(item, index) {
+            var decValue = item[2];
+            if (!tempDecValues.includes(decValue)) {
+                tempOutputValues.push(item);
+                tempDecValues.push(decValue);
+            }
+        });
+
+        outputValues = tempOutputValues;
+
         if (outputValues.length > 0) {
             var outputTables = "";
             $("#h4NoResults").css("visibility", "hidden");
@@ -139,7 +166,7 @@ layout: default
                 row = row + "<td>" + item[1] + "</td>";
                 row = row + "<td>" + item[2] + "</td>";
                 row = row + "<td>" + item[3] + "</td>";
-                row = row + "<td>" + item[4] + "</td>";
+                //row = row + "<td>" + item[4] + "</td>";
                 row = row + "</tr>";
                 outputTables = outputTables + row;
             });
