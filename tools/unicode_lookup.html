@@ -24,20 +24,6 @@ layout: default
 <input id="inputValue" type="text" class="form-control" placeholder="Enter search value here" />
 <br />
 
-<!--<p>Search via the following:</p>
-<ul>
-    <li>Character values</li>
-    <li>Character codes</li>
-    <li>Html codes</li>
-    <li>Decimal values</li>
-    <li>Hexadecimal values</li>
-    <li>Binary values</li>
-</ul>-->
-
-<!--<br />
-<h4>Search by code:</h4>
-<input id="codeValue" type="text" class="form-control" placeholder="Enter unicode value here" />-->
-
 <br />
 <hr class="mt-2 mb-3"/>
 <br />
@@ -60,14 +46,84 @@ layout: default
 </table>
 
 <script>
-    
+    function returnMatchingCharacters(inputString) {
+        var outputValues = [];
+        if (inputString) {
+            for (var i = 0; i < inputString.length; i++) {
+                var rawDecValue = inputString.codePointAt(i);
+                var rawHexValue = rawDecValue.toString(16);
+
+                var formattedUnicodeValue = `${rawHexValue}`;
+                while (formattedUnicodeValue.length < 4) {
+                    formattedUnicodeValue = "0" + formattedUnicodeValue;
+                }
+                formattedUnicodeValue = "U+" + formattedUnicodeValue;
+
+                outputValues.push([`&#${rawDecValue};`, 
+                    formattedUnicodeValue, rawDecValue, 
+                    `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+            }
+        }
+
+        return outputValues;
+    }
+
+    function returnMatchingHexValue(inputHex) {
+        var outputValues = [];
+        regexp = /^[0-9a-fA-FxX]+$/;
+        var trimChars = ["u", "U", "+", "\\", "/"]
+
+        trimChars.forEach(function(item, index) {
+            inputHex = inputHex.replace(item, "");
+        });
+      
+        if (inputHex && regexp.test(inputHex)) {
+            inputHex = inputHex.toUpperCase().replace("0X", "");
+            var rawDecValue = parseInt(inputHex, 16);
+
+            var formattedUnicodeValue = `${inputHex}`;
+            while (formattedUnicodeValue.length < 4) {
+                formattedUnicodeValue = "0" + formattedUnicodeValue;
+            }
+            formattedUnicodeValue = "U+" + formattedUnicodeValue;
+
+            outputValues.push([`&#${rawDecValue};`, 
+                formattedUnicodeValue, rawDecValue, 
+                `0x${inputHex}`, `&amp;#${rawDecValue}; or &amp;#x${inputHex};`]);
+        }
+
+        return outputValues;
+    }
+
+    function returnMatchingDecValue(inputDec) {
+        var outputValues = [];
+        var rawDecValue = parseInt(inputDec);
+        if (Number.isInteger(rawDecValue)) {
+            var rawHexValue = rawDecValue.toString(16);
+
+            var formattedUnicodeValue = `${rawHexValue}`;
+            while (formattedUnicodeValue.length < 4) {
+                formattedUnicodeValue = "0" + formattedUnicodeValue;
+            }
+            formattedUnicodeValue = "U+" + formattedUnicodeValue;
+
+            outputValues.push([`&#${rawDecValue};`, 
+                formattedUnicodeValue, rawDecValue, 
+                `0x${rawHexValue}`, `&amp;#${rawDecValue}; or &amp;#x${rawHexValue};`]);
+        }
+
+        return outputValues;
+    }
 
     function doSearch() {
 
         var outputValues = [];
         var inputString = $("#inputValue").val();
 
-        outputValues.push(["😂", "U+1f602", "128514", "0x1f602", "&#128514;"])
+        //var charMatch = returnMatchingCharacters(inputString);
+        //var charMatch = returnMatchingHexValue(inputString);
+        var charMatch = returnMatchingDecValue(inputString);
+        outputValues = outputValues.concat(charMatch);
         
         if (outputValues.length > 0) {
             var outputTables = "";
@@ -77,12 +133,16 @@ layout: default
             $("#tbResultsTable").css("visibility", "visible");
             $("#tbResultsTable").css("height", "auto");
 
-            /*for (outputValue in outputValues) {
+            outputValues.forEach(function(item, index) {
                 var row = "<tr>";
-                row = row + "<td>" + outputValue[0] + "</td>";
+                row = row + "<td>" + item[0] + "</td>";
+                row = row + "<td>" + item[1] + "</td>";
+                row = row + "<td>" + item[2] + "</td>";
+                row = row + "<td>" + item[3] + "</td>";
+                row = row + "<td>" + item[4] + "</td>";
                 row = row + "</tr>";
                 outputTables = outputTables + row;
-            }*/
+            });
 
             $("#tbResultsTable tbody").html(outputTables);
         } else {
@@ -95,6 +155,8 @@ layout: default
     }
 
     $(document).ready(function() {
+        doSearch();
+
         $("#inputValue").change(function() {
             doSearch();
         });
