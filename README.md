@@ -5,22 +5,30 @@
 
 ### The tools available at this time are listed below:
 
-1. Storage size converter capable of converting everything from bits to yobibytes
-2. URL encoder/decoder
-3. Base64 encoder/decoder
-4. Ascii table
-5. Decimal to Binary + Hexadecimal converter
+##### Encoding/Decoding utilities
+1. URL encoder/decoder
+2. Base64 encoder/decoder
+3. Ascii table
+
+##### Converting utilities
+1. Decimal to Binary + Hexadecimal converter
+2. Storage size converter capable of converting everything from bits to yobibytes
+3. A color picker
+
+##### Time utilities
+10. Time zone converter
+11. Unix time converter
+12. Current Unix timestamp
+
+##### Other
+8. User Agent parser
+9. Secure password generator
 6. Utility for hashing strings using the following methods:
     - MD5
     - SHA1
     - SHA256
     - SHA512
-7. A color picker
-8. User Agent parser
-9. Secure password generator
-10. Time zone converter
-11. Unix time converter
-12. Current Unix timestamp
+13. Unicode character lookup
 
 ### Tools I plan to add in the future:
 
@@ -28,7 +36,6 @@
 2. AES encryption utility
 3. SQL validator
 5. Regex builder/validator
-6. Unicode character lookup
 
 ### Contributing
 
