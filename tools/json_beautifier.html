@@ -1,0 +1,65 @@
+---
+title: JSON Beautifier
+description: Format JSON objects for easy readability with this tool
+layout: default
+---
+
+<br />
+<h2>JSON Beautifier</h2>
+
+<br />
+<textarea class="form-control" placeholder="Place JSON here" id="txtInputJSON" style="height: 10em;"></textarea>
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<div class="col-md-6 col-lg-5 col-xl-4">
+    <input type="button" class="form-control btn btn-primary" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+</div>
+
+<br />
+<textarea class="form-control" id="txtOutputJSON" placeholder="Output JSON" disabled></textarea>
+
+{% include copy_to_clipboard_toast.html %}
+
+<script>
+    function do_beautify() {
+        var input_json = $("#txtInputJSON").val();
+        if (input_json == "") {
+            $("#txtOutputJSON").attr("placeholder", "Output JSON");
+            $("#txtOutputJSON").val("");
+        }
+        else {
+            try {
+                $("#txtOutputJSON").attr("placeholder", "");
+                var json_obj = JSON.parse(input_json);
+                var output = JSON.stringify(json_obj, null, "\t");
+                $("#txtOutputJSON").val(output);
+            }
+            catch (err) {
+                $("#txtOutputJSON").attr("placeholder", "Invalid JSON");
+                $("#txtOutputJSON").val("");
+                console.log(err);
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $("#txtInputJSON").change(function() {
+            do_beautify();
+        });
+
+        $("#txtInputJSON").keyup(function() {
+            do_beautify();
+        });
+
+        $("#btnCopyToClipboard").click(function() {
+            if ($("#txtOutputJSON").val() != "")
+            {
+                navigator.clipboard.writeText($("#txtOutputJSON").val());
+                raise_copy_to_clipboard_toast("btnCopyToClipboard");
+            }
+        });
+    });
+</script>
