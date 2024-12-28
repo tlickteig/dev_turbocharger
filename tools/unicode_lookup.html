@@ -21,6 +21,10 @@ layout: default
         width: 5em;
     }
 
+    .tdMoreInfo {
+        width: 3em;
+    }
+
     #h4NoResults {
         color: var(--bs-tertiary-color);
         visibility: hidden;
@@ -34,10 +38,6 @@ layout: default
     #dvContainer {
         width: 60% !important;
     }
-
-    /*#tbResultsTable {
-        width: 150%;
-    }*/
 </style>
 
 <br />
@@ -61,7 +61,6 @@ layout: default
             <th scope="col">Unicode</th>
             <th scope="col">Dec</th>
             <th scope="col">Hex</th>
-            <!--<th scope="col">Html</th>-->
         </tr>
     </thead>
     <tbody>
@@ -182,8 +181,8 @@ layout: default
                 row = row + "<td class=\"tdUnicodeValue\">" + item[1] + "</td>";
                 row = row + "<td class=\"tdDecValue\">" + item[2] + "</td>";
                 row = row + "<td class=\"tdHexValue\">" + item[3] + "</td>";
-                //row = row + "<td>" + item[4] + "</td>";
                 row = row + "</tr>";
+
                 outputTables = outputTables + row;
             });
 
