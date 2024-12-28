@@ -5,30 +5,31 @@
 
 ### The tools available at this time are listed below:
 
+
 ##### Encoding/Decoding utilities
-1. URL encoder/decoder
-2. Base64 encoder/decoder
-3. Ascii table
+1. [URL encoder/decoder](https://tlickteig.github.io/dev_turbocharger/tools/url_encode_decode)
+2. [Base64 encoder/decoder](https://tlickteig.github.io/dev_turbocharger/tools/base64_encode_decode)
+3. [Ascii table](https://tlickteig.github.io/dev_turbocharger/tools/ascii_table)
 
 ##### Converting utilities
-1. Decimal to Binary + Hexadecimal converter
-2. Storage size converter capable of converting everything from bits to yobibytes
-3. A color picker
+1. [Decimal to Binary + Hexadecimal converter](https://tlickteig.github.io/dev_turbocharger/tools/binary_hex_converter)
+2. [Storage size converter capable of converting everything from bits to yobibytes](https://tlickteig.github.io/dev_turbocharger/tools/storage_size_converter)
+3. [A color picker](https://tlickteig.github.io/dev_turbocharger/tools/color_picker)
 
 ##### Time utilities
-10. Time zone converter
-11. Unix time converter
-12. Current Unix timestamp
+1. [Time zone converter](https://tlickteig.github.io/dev_turbocharger/tools/time_zone_converter)
+2. [Unix time converter](https://tlickteig.github.io/dev_turbocharger/tools/unix_time_converter)
+3. [Current Unix timestamp](https://tlickteig.github.io/dev_turbocharger/tools/current_unix_timestamp)
 
 ##### Other
-8. User Agent parser
-9. Secure password generator
-6. Utility for hashing strings using the following methods:
+1. [User Agent parser](https://tlickteig.github.io/dev_turbocharger/tools/user_agent_parser)
+2. [Secure password generator](https://tlickteig.github.io/dev_turbocharger/tools/secure_password_generator)
+3. [Utility for hashing strings using the following methods:](https://tlickteig.github.io/dev_turbocharger/tools/md5_or_sha_hasher)
     - MD5
     - SHA1
     - SHA256
     - SHA512
-13. Unicode character lookup
+4. [Unicode character lookup](https://tlickteig.github.io/dev_turbocharger/tools/unicode_lookup)
 
 ### Tools I plan to add in the future:
 
