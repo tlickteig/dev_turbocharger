@@ -21,6 +21,10 @@
 2. [Unix time converter](https://tlickteig.github.io/dev_turbocharger/tools/unix_time_converter)
 3. [Current Unix timestamp](https://tlickteig.github.io/dev_turbocharger/tools/current_unix_timestamp)
 
+##### JSON utilities
+1. [JSON minifier](https://tlickteig.github.io/dev_turbocharger/tools/json_minifier)
+2. [JSON beautifier](https://tlickteig.github.io/dev_turbocharger/tools/json_beautifier)
+
 ##### Other
 1. [User Agent parser](https://tlickteig.github.io/dev_turbocharger/tools/user_agent_parser)
 2. [Secure password generator](https://tlickteig.github.io/dev_turbocharger/tools/secure_password_generator)
