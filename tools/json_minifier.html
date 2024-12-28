@@ -1,0 +1,59 @@
+---
+title: JSON Minifier
+description: Easily shorten long JSON objects by getting rid of unneeded whitespace
+layout: default
+---
+
+<br />
+<h2>JSON Minifier</h2>
+
+<br />
+<textarea class="form-control" placeholder="Place JSON here" id="txtInputJSON" style="height: 10em;"></textarea>
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<div class="col-md-3">
+    <input type="button" class="form-control btn btn-primary" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+</div>
+
+<br />
+<textarea class="form-control" id="txtOutputJSON" placeholder="Output JSON" disabled></textarea>
+
+<script>
+    function do_minify() {
+        var input_json = $("#txtInputJSON").val();
+        if (input_json == "") {
+            $("#txtOutputJSON").attr("placeholder", "Output JSON");
+            $("#txtOutputJSON").val("");
+        }
+        else {
+            try {
+                $("#txtOutputJSON").attr("placeholder", "");
+                var json_obj = JSON.parse(input_json);
+                var output = JSON.stringify(json_obj);
+                $("#txtOutputJSON").val(output);
+            }
+            catch (err) {
+                $("#txtOutputJSON").attr("placeholder", "Invalid JSON");
+                $("#txtOutputJSON").val("");
+                console.log(err);
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $("#txtInputJSON").change(function() {
+            do_minify();
+        });
+
+        $("#txtInputJSON").keyup(function() {
+            do_minify();
+        });
+
+        $("#btnCopyToClipboard").click(function() {
+            navigator.clipboard.writeText($("#txtOutputJSON").val());
+        });
+    });
+</script>
