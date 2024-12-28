@@ -4,6 +4,13 @@ description: Easily shorten long JSON objects by getting rid of unneeded whitesp
 layout: default
 ---
 
+<style>
+    #btnCloseToast {
+        margin: 0 auto;
+        padding: 0;
+    }
+</style>
+
 <br />
 <h2>JSON Minifier</h2>
 
@@ -20,6 +27,8 @@ layout: default
 
 <br />
 <textarea class="form-control" id="txtOutputJSON" placeholder="Output JSON" disabled></textarea>
+
+{% include copy_to_clipboard_toast.html %}
 
 <script>
     function do_minify() {
@@ -53,7 +62,11 @@ layout: default
         });
 
         $("#btnCopyToClipboard").click(function() {
-            navigator.clipboard.writeText($("#txtOutputJSON").val());
+            if ($("#txtOutputJSON").val() != "")
+            {
+                navigator.clipboard.writeText($("#txtOutputJSON").val());
+                raise_copy_to_clipboard_toast("btnCopyToClipboard");
+            }
         });
     });
 </script>

@@ -1,0 +1,27 @@
+<!-- Heavily based off of https://getbootstrap.com/docs/5.3/components/toasts/ -->
+ 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="dvCopyToClipboardToastContainer" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div col="container">
+        <div class="row" style="padding: 1em">
+            <h6 style="margin: 0">
+                <span>
+                    <input type="button" class="btn-close" id="btnCloseToast" data-bs-dismiss="toast" aria-label="Close" />
+                </span>
+                <span>
+                    Copied to the clipboard successfully!
+                </span>
+            </h6>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    function raise_copy_to_clipboard_toast(triggerId) {
+        const toastTrigger = document.getElementById(triggerId);
+        const toastLiveExample = document.getElementById('dvCopyToClipboardToastContainer');
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        toastBootstrap.show();
+    }
+</script>
