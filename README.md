@@ -7,7 +7,7 @@
 
 
 ##### Encoding/Decoding utilities
-1. [URL encoder/decoder](https://tlickteig.github.io/dev_turbocharger/tools/url_encode_decode)
+1. [URL encoder/decoder](https://tlickteig.github.io/dev_turbocharger/tools/url_encode_or_decode)
 2. [Base64 encoder/decoder](https://tlickteig.github.io/dev_turbocharger/tools/base64_encode_decode)
 3. [Ascii table](https://tlickteig.github.io/dev_turbocharger/tools/ascii_table)
 
