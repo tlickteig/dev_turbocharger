@@ -1,0 +1,74 @@
+---
+title: XML Minifier
+description: Easily shorten long XML documents by removing unnecessary whitespace
+layout: default
+---
+
+<br />
+<h2>XML Minifier</h2>
+
+<br />
+<textarea class="form-control" placeholder="Place XML here" id="txtInputXML" style="height: 10em;"></textarea>
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<div class="col-md-6 col-lg-5 col-xl-4">
+    <input type="button" class="form-control btn btn-primary" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+</div>
+
+<br />
+<textarea class="form-control" id="txtOutputXML" placeholder="Output XML" disabled></textarea>
+
+{% include copy_to_clipboard_toast.html %}
+
+<script>
+    function do_minify() {
+        var input_xml = $("#txtInputXML").val();
+        if (input_xml == "") {
+            $("#txtOutputXML").attr("placeholder", "Output XML");
+            $("#txtOutputXML").val("");
+        }
+        else {
+            try {
+                $("#txtOutputXML").attr("placeholder", "");
+
+                const parser = new DOMParser();
+                const doc = new parser.parseFromString(input_xml, "application/xml");
+                const errorNode = doc.querySelector("parsererror");
+                if (errorNode) {
+                    throw new Error("Invalid XML found");
+                }
+
+                const serializer = new XMLSerializer();
+                var output = serializer.serializeToString(doc);
+
+                $("#txtOutputXML").val(output);
+            }
+            catch (err) {
+                $("#txtOutputXML").attr("placeholder", "Invalid XML");
+                $("#txtOutputXML").val("");
+                console.log(err);
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $("#txtInputXML").change(function() {
+            do_minify();
+        });
+
+        $("#txtInputXML").keyup(function() {
+            do_minify();
+        });
+
+        $("#btnCopyToClipboard").click(function() {
+            if ($("#txtOutputXML").val() != "")
+            {
+                navigator.clipboard.writeText($("#txtOutputXML").val());
+                raise_copy_to_clipboard_toast("btnCopyToClipboard");
+            }
+        });
+    });
+</script>
