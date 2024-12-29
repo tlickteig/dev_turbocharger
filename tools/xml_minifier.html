@@ -35,7 +35,7 @@ layout: default
                 $("#txtOutputXML").attr("placeholder", "");
 
                 const parser = new DOMParser();
-                const doc = new parser.parseFromString(input_xml, "application/xml");
+                const doc = parser.parseFromString(input_xml, "application/xml");
                 const errorNode = doc.querySelector("parsererror");
                 if (errorNode) {
                     throw new Error("Invalid XML found");
@@ -43,6 +43,7 @@ layout: default
 
                 const serializer = new XMLSerializer();
                 var output = serializer.serializeToString(doc);
+                output = output.replace(/>\s+</g, '><').trim();
 
                 $("#txtOutputXML").val(output);
             }
