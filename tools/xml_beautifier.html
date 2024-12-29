@@ -1,0 +1,90 @@
+---
+title: XML Beautifier
+description: Format your XML documents for easy viewing
+layout: default
+---
+
+<br />
+<h2>XML Beautifier</h2>
+
+<br />
+<textarea class="form-control" placeholder="Place XML here" id="txtInputXML" style="height: 10em;"></textarea>
+
+<br />
+<hr class="mt-2 mb-3"/>
+<br />
+
+<div class="col-md-6 col-lg-5 col-xl-4">
+    <input type="button" class="form-control btn btn-primary" value="Copy to Clipboard" id="btnCopyToClipboard"/>
+</div>
+
+<br />
+<textarea class="form-control" id="txtOutputXML" placeholder="Output XML" disabled></textarea>
+
+{% include copy_to_clipboard_toast.html %}
+
+<script>
+    function do_beautify() {
+        var input_xml = $("#txtInputXML").val();
+        if (input_xml == "") {
+            $("#txtOutputXML").attr("placeholder", "Output XML");
+            $("#txtOutputXML").val("");
+        }
+        else {
+            try {
+                $("#txtOutputXML").attr("placeholder", "");
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(input_xml, "application/xml");
+                const errorNode = doc.querySelector("parsererror");
+                if (errorNode) {
+                    throw new Error("Invalid XML found");
+                }
+
+                const serializer = new XMLSerializer();
+                var minifiedOutput = serializer.serializeToString(doc);
+                
+                const formattedOutput = minifiedOutput
+                    .replace(/(>)(<)(\/*)/g, '$1\n$2$3') // Add newlines between tags
+                    .split('\n')
+                    .reduce((formatted, line) => {
+                    let indent = 0;
+
+                    // Adjust indentation based on opening/closing tags
+                    if (line.match(/^<\/\w/)) indent--;
+                    formatted.push('  '.repeat(indent) + line);
+                    if (line.match(/^<\w[^>]*[^\/]>$/)) indent++;
+
+                    return formatted;
+                    }, [])
+                    .join('\n')
+                    .trim();
+
+                $("#txtOutputXML").val(formattedOutput);
+            }
+            catch (err) {
+                $("#txtOutputXML").attr("placeholder", "Invalid XML");
+                $("#txtOutputXML").val("");
+                console.log(err);
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $("#txtInputXML").change(function() {
+            do_beautify();
+        });
+
+        $("#txtInputXML").keyup(function() {
+            do_beautify();
+        });
+
+        $("#btnCopyToClipboard").click(function() {
+            if ($("#txtOutputXML").val() != "")
+            {
+                navigator.clipboard.writeText($("#txtOutputXML").val());
+                raise_copy_to_clipboard_toast("btnCopyToClipboard");
+            }
+        });
+    });
+</script>
