@@ -44,23 +44,27 @@ layout: default
                 const serializer = new XMLSerializer();
                 var minifiedOutput = serializer.serializeToString(doc);
                 
-                const formattedOutput = minifiedOutput
-                    .replace(/(>)(<)(\/*)/g, '$1\n$2$3') // Add newlines between tags
-                    .split('\n')
-                    .reduce((formatted, line) => {
-                    let indent = 0;
+                // https://stackoverflow.com/questions/376373/pretty-printing-xml-with-javascript
+                var xsltDoc = new DOMParser().parseFromString([
+                    // describes how we want to modify the XML - indent everything
+                    '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">',
+                    '  <xsl:strip-space elements="*"/>',
+                    '  <xsl:template match="para[content-style][not(text())]">', // change to just text() to strip space in text nodes
+                    '    <xsl:value-of select="normalize-space(.)"/>',
+                    '  </xsl:template>',
+                    '  <xsl:template match="node()|@*">',
+                    '    <xsl:copy><xsl:apply-templates select="node()|@*"/></xsl:copy>',
+                    '  </xsl:template>',
+                    '  <xsl:output indent="yes"/>',
+                    '</xsl:stylesheet>',
+                ].join('\n'), 'application/xml');
 
-                    // Adjust indentation based on opening/closing tags
-                    if (line.match(/^<\/\w/)) indent--;
-                    formatted.push('  '.repeat(indent) + line);
-                    if (line.match(/^<\w[^>]*[^\/]>$/)) indent++;
+                var xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xsltDoc);
+                var resultDoc = xsltProcessor.transformToDocument(doc);
+                var resultXml = new XMLSerializer().serializeToString(resultDoc);
 
-                    return formatted;
-                    }, [])
-                    .join('\n')
-                    .trim();
-
-                $("#txtOutputXML").val(formattedOutput);
+                $("#txtOutputXML").val(resultXml);
             }
             catch (err) {
                 $("#txtOutputXML").attr("placeholder", "Invalid XML");
