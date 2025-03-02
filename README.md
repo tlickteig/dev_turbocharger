@@ -26,8 +26,8 @@
 2. [JSON beautifier](https://tlickteig.github.io/dev_turbocharger/tools/json_beautifier)
 
 ##### XML utilities
-1. [JSON minifier](https://tlickteig.github.io/dev_turbocharger/tools/xml_minifier)
-2. [JSON beautifier](https://tlickteig.github.io/dev_turbocharger/tools/xml_beautifier)
+1. [XML minifier](https://tlickteig.github.io/dev_turbocharger/tools/xml_minifier)
+2. [XML beautifier](https://tlickteig.github.io/dev_turbocharger/tools/xml_beautifier)
 
 ##### Other
 1. [User Agent parser](https://tlickteig.github.io/dev_turbocharger/tools/user_agent_parser)
